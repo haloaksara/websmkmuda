@@ -83,7 +83,7 @@
             </div>
             <nav id="sidebar" class="col-md-2 d-none d-md-block sidebar">
             <div class="sidebar-sticky">
-            <h2>Menu</h2>
+            <h2>Menu baru</h2>
             <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" href="dashboard.php">Beranda</a>
