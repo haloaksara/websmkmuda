@@ -5,6 +5,7 @@ $conn=mysqli_connect("localhost","root","","sekolahkita");
 $query = "SELECT * FROM tb_berita WHERE status = 1";
 $result = mysqli_query($conn, $query);
 
+// tampung hasil query ke dalam array
 $berita = [];
 while ($row = mysqli_fetch_assoc($result)) {
   $berita [] = $row;
@@ -839,6 +840,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
+      <!-- lakukan pengecekan apakah data lebih dari 3, jika ya maka buat card bisa di slider -->
       <?php if (count($berita) >= 3): ?>
         <div class="container swiper">
           <div class="card-wrapper">
@@ -848,7 +850,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                   <a href="#" class="card-link">
                     <img src="berita/img/<?= $item['gambar']; ?>" class="card-image" style="height: 200px; object-fit: cover;">
                     <h2 class="card-title"><?= $item['judul']; ?></h2>
-                    <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p>
+                    <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p> <!-- batasi konten hanya 100 karakter -->
                     <button class="btn btn-primary  ">Baca Selengkapnya</button>
                   </a>
                 </li>
@@ -859,6 +861,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div class="swiper-slide-button swiper-button-next"></div>
           </div>
         </div>
+        <!-- jika data < dari 3 maka buat card biasa yang tidak bisa di slider -->
       <?php else: ?>
         <div class="container">
           <div class="row">
@@ -868,7 +871,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <img src="berita/img/<?= $item['gambar']; ?>" class="card-img-top" alt="<?= $item['judul']; ?>" style="height: 200px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title"><?= $item['judul']; ?></h5>
-              <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p>
+              <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p> <!-- batasi konten hanya 100 karakter -->
               <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
             </div>
           </div>

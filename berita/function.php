@@ -12,13 +12,15 @@ function query($query){
 	return $rows;
 }
 
+// fungsi untuk upload gambar
 function upload() {
+    // ambil data gambar
     $namaFile = $_FILES['gambar']['name'];
     $ukuranFile = $_FILES['gambar']['size'];
     $error = $_FILES['gambar']['error'];
     $tmpName = $_FILES['gambar']['tmp_name'];
 
-    // Check if no file is uploaded
+    // cek apakah tidak ada gambar yang diupload
     if ($error === 4) {
         echo "<script>
                 alert('Pilih gambar terlebih dahulu!');
@@ -26,10 +28,11 @@ function upload() {
         return false;
     }
 
-    // Check if the uploaded file is an image
-    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-    $ekstensiGambar = explode('.', $namaFile);
-    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    // cek apakah yang diupload adalah gambar
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png']; //ekstensi gambar yang diizinkan
+    $ekstensiGambar = explode('.', $namaFile); //memecah nama file berdasarkan titik
+    $ekstensiGambar = strtolower(end($ekstensiGambar)); //mengambil ekstensi gambar dan diubah menjadi huruf kecil
+    // cek apakah ekstensi gambar yang diupload tidak sesuai dengan yang diizinkan
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
                 alert('Yang anda upload bukan gambar!');
@@ -37,7 +40,7 @@ function upload() {
         return false;
     }
 
-    // Check if the file size is too large
+    // cek jika ukuran gambar terlalu besar
     if ($ukuranFile > 5000000) {
         echo "<script>
                 alert('Ukuran gambar terlalu besar!');
@@ -45,12 +48,12 @@ function upload() {
         return false;
     }
 
-    // Generate new file name
+    // buat nama gambar baru
     $namaFileBaru = uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $ekstensiGambar;
 
-    // Move the uploaded file to the img folder
+    // pindahkan file ke folder img
     move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
 
     return $namaFileBaru;
@@ -59,7 +62,8 @@ function upload() {
 function tambah($data) {
     global $conn;
 
-    $judul = htmlspecialchars($data["judul"]);
+    // ambil data dari tiap elemen dalam form
+    $judul = htmlspecialchars($data["judul"]); //htmlspecialchars digunakan untuk menghindari serangan xss
     $konten = htmlspecialchars($data["konten"]);
     $status = htmlspecialchars($data["status"]);
     $tanggal_post = htmlspecialchars($data["tanggal_post"]);
@@ -70,6 +74,7 @@ function tambah($data) {
         return false;
     }
 
+    // query insert data
     $query = "INSERT INTO tb_berita
                 (judul, konten, gambar, status, tanggal_post)
               VALUES
@@ -88,7 +93,6 @@ function hapus($id){
 
 function ubah($data) {
     global $conn;
-    // var_dump($data);die;
 
     $id = $data["id"];
 
@@ -102,11 +106,12 @@ function ubah($data) {
     $tanggal_post = $data["tanggal_post"];
     $gambar = $data["gambar"];
 
-    // Check if user uploaded a new image
+    // cek apakah user pilih gambar baru atau tidak, jika iya maka upload gambar baru dan hapus gambar lama
     if ($data['gambar'] != $dataLama['gambar']) {
         unlink('img/' . $dataLama['gambar']);
     }
 
+    // query update data
     $query = "UPDATE tb_berita SET 
                 judul = '$judul', 
                 konten = '$konten', 
@@ -118,29 +123,5 @@ function ubah($data) {
 
     return mysqli_affected_rows($conn);
 }
-
-function ubahOld($data){
-	global $conn;
-	// var_dump($data["alamat"]);die;
-
-	$kode = $data["kode_guru"];
-	$nama = $data["nama_guru"];
-	$alamat = $data["alamat"];
-	$notelp = $data["no_telp"];
-	$user = $data["username"];
-	$pass = $data["password"];
-
-	$query = "UPDATE tb_guru SET 
-				nama_guru = '$nama', 
-				alamat = '$alamat', 
-				no_telp = '$notelp', 
-				password = '$pass' 
-			  WHERE kode_guru = '$kode'";
-	mysqli_query($conn, $query);
-
-	return mysqli_affected_rows($conn);
-} 
-
-
 ?>
 

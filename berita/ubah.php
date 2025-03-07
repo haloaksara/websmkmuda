@@ -7,6 +7,7 @@ $berita = query("SELECT * FROM tb_berita WHERE id = '$id'")[0];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // lakukan pengecekan apakah upload gambar?
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+        // ambil data file
         $fileName = $_FILES['gambar']['name'];
         $fileTmpPath = $_FILES['gambar']['tmp_name'];
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
@@ -17,8 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadFileDir = 'img/';
             $dest_path = $uploadFileDir . $fileName;
     
+            // pindahkan file ke folder img
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $_POST['gambar'] = $fileName;
+                $_POST['gambar'] = $fileName; // set nama file ke $_POST['gambar']
             } else {
                 echo "<script>alert('Error moving the uploaded file.');</script>";
             }
@@ -26,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Upload failed. Allowed file types: " . implode(',', $allowedfileExtensions) . "');</script>";
         }
     } else {
-        $_POST['gambar'] = $berita['gambar'];
+        $_POST['gambar'] = $berita['gambar']; // set nama file ke $_POST['gambar']
     }
 
     $result = ubah($_POST);
@@ -177,6 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					</div>
 					<div class="form-group">
 						<label for="gambar">Gambar</label>
+                        <!-- lakukan pengecekan apakah terdapat gambar atau tidak,jika ya maka tampilkan jika tidak maka tidak tampil -->
                         <?php if (!empty($berita['gambar'])): ?>
                             <div class="mb-2">
                             <img src="img/<?= $berita['gambar'] ?>" alt="Gambar Berita" style="max-width: 200px;">

@@ -1,6 +1,7 @@
 <?php 
     require 'function.php';
 
+    // ambil data dari tb_berita
     $berita=query("SELECT * FROM tb_berita");
 
 ?>
@@ -144,6 +145,7 @@
                         </thead>
                         <tbody>
                             <?php $i=1; ?>
+                            <!-- lakukan perulangan untuk menampilkan berita -->
                             <?php foreach ($berita as $row) : ?>
                             <tr>
                                 <td><?=$i ?></td>
@@ -151,6 +153,7 @@
                                 <td><?= $row["konten"] ?></td>
                                 <td><img src="img/<?= $row["gambar"] ?>" alt="" style="width: 100px; height: auto;"></td>
                                 <td>
+                                    <!-- lakukan pengecekan status, jika 1 maka cetak teks Publish, jika 0 maka cetak teks Draft -->
                                     <?php
                                     if ($row["status"] == 1) {
                                         echo "Publish";
