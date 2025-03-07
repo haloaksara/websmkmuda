@@ -1,3 +1,16 @@
+<?php
+$conn=mysqli_connect("localhost","root","","sekolahkita");
+
+// buat query untuk mengambil data tb_berita yang status = 1
+$query = "SELECT * FROM tb_berita WHERE status = 1";
+$result = mysqli_query($conn, $query);
+
+$berita = [];
+while ($row = mysqli_fetch_assoc($result)) {
+  $berita [] = $row;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +36,10 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Linking SwiperJS CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.css">
+  <link href="assets/css/style.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -815,6 +832,53 @@
 
     </section><!-- /Services Section -->
 
+    <!-- news section -->
+    <section id="news" class="news section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Berita</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <?php if (count($berita) >= 3): ?>
+        <div class="container swiper">
+          <div class="card-wrapper">
+            <ul class="card-list swiper-wrapper">
+              <?php foreach ($berita as $item): ?>
+                <li class="card-item swiper-slide">
+                  <a href="#" class="card-link">
+                    <img src="berita/img/<?= $item['gambar']; ?>" class="card-image" style="height: 200px; object-fit: cover;">
+                    <h2 class="card-title"><?= $item['judul']; ?></h2>
+                    <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p>
+                    <button class="btn btn-primary  ">Baca Selengkapnya</button>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-slide-button swiper-button-prev"></div>
+            <div class="swiper-slide-button swiper-button-next"></div>
+          </div>
+        </div>
+      <?php else: ?>
+        <div class="container">
+          <div class="row">
+            <?php foreach ($berita as $item): ?>
+              <div class="col-md-4">
+          <div class="card mb-4">
+            <img src="berita/img/<?= $item['gambar']; ?>" class="card-img-top" alt="<?= $item['judul']; ?>" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title"><?= $item['judul']; ?></h5>
+              <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p>
+              <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+            </div>
+          </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      <?php endif; ?>
+    </section>
+
     <!-- Pricing Section -->
     <section id="pricing" class="pricing section light-background">
 
@@ -1234,6 +1298,9 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Linking SwiperJS script -->
+  <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>

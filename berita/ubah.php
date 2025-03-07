@@ -195,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<label for="tanggal_post">Tanggal Post</label>
 						<input type="date" class="form-control" id="tanggal_post" name="tanggal_post" value="<?= $berita['tanggal_post'] ?>" required>
 					</div>
-					<button type="submit" name="submit" class="btn btn-primary">Tambah Berita</button>
+					<button type="submit" name="submit" class="btn btn-primary">Simpan Berita</button>
 				</form>
 			</main>
 		</div>
