@@ -1,14 +1,18 @@
+<?php 
+    require 'function.php';
+
+    // ambil data dari tb_berita
+    $berita=query("SELECT * FROM tb_berita");
+
+?>
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Sederhana</title>
-
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="Public/Css/admin.css">
+    <link rel="stylesheet" type="text/css" href="../Public/Css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
@@ -104,13 +108,13 @@
                     <h2>Menu</h2>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="dashboard.php">Beranda</a>
+                            <a class="nav-link" href="dashboard.php">Beranda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="guru/index.php">Data Guru</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="berita/index.php">Data Berita</a>
+                            <a class="nav-link active" href="berita/index.php">Data Berita</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">Data Siswa</a>
@@ -124,50 +128,54 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Selamat Datang di Dashboard</h1>
+                    <h1 class="h2">Data Berita</h1>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card text-white bg-primary mb-3">
-                            <div class="card-header">Total Guru</div>
-                            <div class="card-body">
-                                <h5 class="card-title">150</h5>
-                                <p class="card-text">Jumlah total guru yang terdaftar.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-success mb-3">
-                            <div class="card-header">Total Siswa</div>
-                            <div class="card-body">
-                                <h5 class="card-title">1200</h5>
-                                <p class="card-text">Jumlah total siswa yang terdaftar.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">Total Berita</div>
-                            <div class="card-body">
-                                <h5 class="card-title">30</h5>
-                                <p class="card-text">Jumlah total berita yang dipublikasikan.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="tambah.php" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data</a>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Konten</th>
+                                <th>Gambar</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i=1; ?>
+                            <!-- lakukan perulangan untuk menampilkan berita -->
+                            <?php foreach ($berita as $row) : ?>
+                            <tr>
+                                <td><?=$i ?></td>
+                                <td><?= $row["judul"] ?></td>
+                                <td><?= $row["konten"] ?></td>
+                                <td><img src="img/<?= $row["gambar"] ?>" alt="" style="width: 100px; height: auto;"></td>
+                                <td>
+                                    <!-- lakukan pengecekan status, jika 1 maka cetak teks Publish, jika 0 maka cetak teks Draft -->
+                                    <?php
+                                    if ($row["status"] == 1) {
+                                        echo "Publish";
+                                    }else{
+                                        echo "Draft";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <a href="ubah.php?id=<?= $row["id"] ?>" class="btn btn-warning btn-sm"><i
+                                            class="fas fa-edit"></i> Ubah</a>
+                                    <a href="hapus.php?id=<?= $row["id"]?>"
+                                        onclick="return confirm('yakin?');" class="btn btn-danger btn-sm"><i
+                                            class="fas fa-trash"></i> Hapus</a>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="row btn-custom">
-                    <div class="col-md-4">
-                        <a href="guru/tambah.php" class="btn btn-primary btn-block">Tambah Guru</a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="siswa/tambah.php" class="btn btn-success btn-block">Tambah Siswa</a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="berita/tambah.php" class="btn btn-warning btn-block">Tambah Berita</a>
-                    </div>
-                </div>
-                <p>Ini adalah contoh konten dashboard sederhana.</p>
-                <p>Anda bisa menambahkan lebih banyak konten di sini.</p>
+                
             </main>
         </div>
     </div>
