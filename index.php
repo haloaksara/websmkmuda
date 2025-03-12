@@ -1,5 +1,6 @@
 <?php
-$conn=mysqli_connect("localhost","root","","sekolahkita");
+// buat koneksi ke database
+$conn = mysqli_connect("localhost", "root", "", "sekolahkita");
 
 // buat query untuk mengambil data tb_berita yang status = 1
 $query = "SELECT * FROM tb_berita WHERE status = 1";
@@ -18,13 +19,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - iLanding Bootstrap Template</title>
+  <title>SMK MUDA | New Website</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="Public/Img/Images.jpg" rel="icon">
+  <link href="Public/Img/Images.jpg" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -45,13 +46,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: iLanding
-  * Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
-  * Updated: Nov 12 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  
 </head>
 
 <body class="index-page">
@@ -60,9 +55,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
+      
         <img src="Public/Img/Images.jpg" alt="">
-        <!-- <h1 class="sitename">iLanding</h1> -->
+       
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -73,7 +68,7 @@ while ($row = mysqli_fetch_assoc($result)) {
           <li><a href="#services">
           Service
           </a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#pricing">PBDB</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
@@ -128,7 +123,7 @@ while ($row = mysqli_fetch_assoc($result)) {
               </p>
 
               <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1">Get Started</a>
+                <a href="login.php" class="btn btn-primary me-0 me-sm-2 mx-1">Login</a>
                 <a href="https://youtu.be/4RYAyQ0U7Z4?si=bRDK9TG1hZs98BgR" class="btn btn-link mt-2 mt-sm-0 glightbox">
                   <i class="bi bi-play-circle me-1"></i>
                   Play Video
@@ -139,7 +134,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
           <div class="col-lg-6">
             <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
-              <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
+              <img src="Public/Img/coba.png" alt="Hero Image" class="img-fluid">
 
               <!-- <div class="customers-badge">
                 <div class="customer-avatars">
@@ -268,8 +263,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <img src="Public/Img/gambar3.png" alt="Team Discussion" class="img-fluid small-image rounded-4">
               </div>
               <div class="experience-badge floating">
-                <h3>15+ <span>Years</span></h3>
-                <p>Of experience in business service</p>
+                <h3>16+ <span>Years</span></h3>
+                <p>Mendidik Generasi Bangsa</p>
               </div>
             </div>
           </div>
@@ -285,7 +280,7 @@ while ($row = mysqli_fetch_assoc($result)) {
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Jurusan</h2>
-        <p>SMK Muhammadiyah 02 Paleran Mempunyai 3 Jurusan yaiut Jurusan RPL,TSM & BSD</p>
+        <p>SMK Muhammadiyah 02 Paleran Mempunyai 3 Jurusan yaitu Jurusan RPL,TSM & BSD</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -340,16 +335,16 @@ while ($row = mysqli_fetch_assoc($result)) {
           <div class="tab-pane fade" id="features-tab-2">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                <h3>Neque exercitationem debitis</h3>
+                <h3>Teknik Sepeda Motor</h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                    Teknik Sepeda Motor adalah jurusan yang fokus pada keterampilan dan pengetahuan dalam perawatan, perbaikan, dan modifikasi sepeda motor. Siswa akan belajar tentang mesin, sistem kelistrikan, dan teknologi terbaru dalam industri otomotif.
+                  
                 </p>
                 <ul>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Pelajari dasar-dasar mesin dan komponen sepeda motor.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Praktikkan keterampilan perawatan dan perbaikan secara rutin.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Ikuti perkembangan teknologi terbaru dalam industri otomotif.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Bergabunglah dengan komunitas atau klub sepeda motor untuk berbagi pengetahuan dan pengalaman dan Manfaatkan sumber daya online seperti tutorial video dan forum diskusi. </span></li>
                 </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
@@ -361,15 +356,16 @@ while ($row = mysqli_fetch_assoc($result)) {
           <div class="tab-pane fade" id="features-tab-3">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                <h3>Voluptatibus commodi accusamu</h3>
+                <h3>Bisnis Digital</h3>
                 <ul>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span></li>
-                </ul>
+                    <li><i class="bi bi-check2-all"></i> <span>Pelajari dasar-dasar pemasaran digital dan e-commerce.</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span>Manfaatkan media sosial untuk mempromosikan produk atau layanan.</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span>Gunakan analisis data untuk memahami perilaku konsumen dan mengoptimalkan strategi bisnis.</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span>Pelajari cara membuat dan mengelola toko online.</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span>Ikuti perkembangan teknologi dan tren terbaru dalam bisnis digital.</span></li>
+                 </ul>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                    Bisnis Digital dalam pendidikan adalah program yang mengajarkan siswa tentang cara memanfaatkan teknologi digital untuk menciptakan, mengelola, dan mengembangkan bisnis. Siswa akan belajar tentang pemasaran digital, e-commerce, analisis data, dan strategi bisnis online. Program ini bertujuan untuk membekali siswa dengan keterampilan yang dibutuhkan untuk sukses di era digital.
                 </p>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
@@ -847,11 +843,11 @@ while ($row = mysqli_fetch_assoc($result)) {
             <ul class="card-list swiper-wrapper">
               <?php foreach ($berita as $item): ?>
                 <li class="card-item swiper-slide">
-                  <a href="#" class="card-link">
+                  <a href="bertita.php" class="card-link">
                     <img src="berita/img/<?= $item['gambar']; ?>" class="card-image" style="height: 200px; object-fit: cover;">
                     <h2 class="card-title"><?= $item['judul']; ?></h2>
                     <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p> <!-- batasi konten hanya 100 karakter -->
-                    <button class="btn btn-primary  ">Baca Selengkapnya</button>
+                    <button class="btn btn-primary">Baca Selengkapnya</button>
                   </a>
                 </li>
               <?php endforeach; ?>
@@ -872,7 +868,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div class="card-body">
               <h5 class="card-title"><?= $item['judul']; ?></h5>
               <p class="card-text"><?= substr($item['konten'], 0, 100); ?>...</p> <!-- batasi konten hanya 100 karakter -->
-              <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+              <a href="bertita.php" class="btn btn-primary">Baca Selengkapnya</a>
             </div>
           </div>
               </div>
