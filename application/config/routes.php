@@ -53,46 +53,12 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// route auth
 $route['login'] =   'Auth/login';
 $route['register'] =   'Auth/register';
-
-$route['detail/(:any)'] =   'Home/show/$1';
-$route['cart'] =   'User_cart/index';
-$route['checkout'] =   'User_cart/checkout';
+$route['logout'] =   'Auth/logout';
 
 // route admin
-$route['login'] =   'Auth/login'; //untuk login
-$route['dashboard'] =   'Admin_home';
+$route['dashboard'] =   'Dashboard';
 
-//route admin product
-$route['produk'] = 'Produk'; //menampilkan list produk
-$route['product-add'] = 'Produk/add'; //menampilkan form tambah produk
-$route['product-edit/(:any)'] = 'Produk/edit/$1'; //menampilkan form edit produk
-$route['product-delete/(:any)'] = 'Produk/delete/$1'; //delete
-
-//route admin pemesanan
-$route['transaction'] = 'Admin_transaction';
-$route['transaction-detail/(:any)'] = 'Admin_transaction/detail/$1';
-$route['transaction-delete/(:any)'] = 'Admin_transaction/delete/$1';
-
-//route register login user
-$route['user/login'] =   'User_auth/login';
-$route['user/register'] =   'User_auth/register';
-
-// route frontend produk
-$route['v/produk'] = 'V_produk';
-$route['v/produk/(:any)'] = 'V_produk/index/$1';
-$route['v/detail/(:any)'] = 'V_produk/detail/$1';
-
-$route['v/add_cart/(:any)'] = 'User_cart/add_cart/$1';
-$route['v/delete_cart/(:any)'] = 'User_cart/delete_cart/$1';
-
-$route['v/checkout_action'] = 'User_cart/checkout_action';
-
-$route['order'] = 'User_order';
-$route['check_coupon'] = 'User_cart/check_coupon';
-
-
-$route['ipaymu'] = 'Ipaymu';
-
-$route['user/forgot_password'] =   'User_auth/forgot';
+$route['forgot_password'] =   'User_auth/forgot';

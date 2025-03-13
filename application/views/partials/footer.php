@@ -1,69 +1,82 @@
-<div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-	<div class="row px-xl-5 pt-5">
-		<div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-			<h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-			<p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum
-				tempor no vero est magna amet no</p>
-			<p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-			<p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-			<p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-		</div>
-		<div class="col-lg-8 col-md-12">
-			<div class="row">
-				<div class="col-md-4 mb-5">
-					<h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-					<div class="d-flex flex-column justify-content-start">
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-						<a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-					</div>
+<footer id="footer" class="footer">
+
+	<div class="container footer-top">
+		<div class="row gy-4">
+			<div class="col-lg-4 col-md-6 footer-about">
+				<a href="index.html" class="logo d-flex align-items-center">
+					<span class="sitename">iLanding</span>
+				</a>
+				<div class="footer-contact pt-3">
+					<p>A108 Adam Street</p>
+					<p>New York, NY 535022</p>
+					<p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+					<p><strong>Email:</strong> <span>info@example.com</span></p>
 				</div>
-				<div class="col-md-4 mb-5">
-					<h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-					<div class="d-flex flex-column justify-content-start">
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-						<a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-						<a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-					</div>
-				</div>
-				<div class="col-md-4 mb-5">
-					<h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-					<p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-					<form action="">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Your Email Address">
-							<div class="input-group-append">
-								<button class="btn btn-primary">Sign Up</button>
-							</div>
-						</div>
-					</form>
-					<h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-					<div class="d-flex">
-						<a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-						<a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-						<a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-						<a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-					</div>
+				<div class="social-links d-flex mt-4">
+					<a href=""><i class="bi bi-twitter-x"></i></a>
+					<a href=""><i class="bi bi-facebook"></i></a>
+					<a href=""><i class="bi bi-instagram"></i></a>
+					<a href=""><i class="bi bi-linkedin"></i></a>
 				</div>
 			</div>
+
+			<div class="col-lg-2 col-md-3 footer-links">
+				<h4>Useful Links</h4>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About us</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Terms of service</a></li>
+					<li><a href="#">Privacy policy</a></li>
+				</ul>
+			</div>
+
+			<div class="col-lg-2 col-md-3 footer-links">
+				<h4>Our Services</h4>
+				<ul>
+					<li><a href="#">Web Design</a></li>
+					<li><a href="#">Web Development</a></li>
+					<li><a href="#">Product Management</a></li>
+					<li><a href="#">Marketing</a></li>
+					<li><a href="#">Graphic Design</a></li>
+				</ul>
+			</div>
+
+			<div class="col-lg-2 col-md-3 footer-links">
+				<h4>Hic solutasetp</h4>
+				<ul>
+					<li><a href="#">Molestiae accusamus iure</a></li>
+					<li><a href="#">Excepturi dignissimos</a></li>
+					<li><a href="#">Suscipit distinctio</a></li>
+					<li><a href="#">Dilecta</a></li>
+					<li><a href="#">Sit quas consectetur</a></li>
+				</ul>
+			</div>
+
+			<div class="col-lg-2 col-md-3 footer-links">
+				<h4>Nobis illum</h4>
+				<ul>
+					<li><a href="#">Ipsam</a></li>
+					<li><a href="#">Laudantium dolorum</a></li>
+					<li><a href="#">Dinera</a></li>
+					<li><a href="#">Trodelas</a></li>
+					<li><a href="#">Flexo</a></li>
+				</ul>
+			</div>
+
 		</div>
 	</div>
-	<div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-		<div class="col-md-6 px-xl-0">
-			<p class="mb-md-0 text-center text-md-left text-secondary">
-				&copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-				by
-				<a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-			</p>
-		</div>
-		<div class="col-md-6 px-xl-0 text-center text-md-right">
-			<img class="img-fluid" src="img/payments.png" alt="">
+
+	<div class="container copyright text-center mt-4">
+		<p>© <span>Copyright</span> <strong class="px-1 sitename">iLanding</strong> <span>All Rights Reserved</span>
+		</p>
+		<div class="credits">
+			<!-- All the links in the footer should remain intact. -->
+			<!-- You can delete the links only if you've purchased the pro version. -->
+			<!-- Licensing information: https://bootstrapmade.com/license/ -->
+			<!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+			Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 		</div>
 	</div>
-</div>
+
+</footer>

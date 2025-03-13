@@ -7,12 +7,12 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session');		
-		$this->load->model('m_login');
+		$this->load->model('m_auth');
 	}
 
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->view('admin/home');
 	}
 
 	public function login()
@@ -27,20 +27,23 @@ class Auth extends CI_Controller {
 
 	public function action_login() 
 	{
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');	
+		$username = trim($this->input->post('username'));
+		$password = trim($this->input->post('password'));	
 
 		$where = array(
 			'username' => $username,
-			'password' => md5($password)
+			'password' => sha1($password),
+			'is_active' => '1'
 		);
 
-		$cek = $this->m_login->cek_login("admin",$where)->num_rows();
+		$cek = $this->m_auth->cek_login("users",$where)->row_array();
 
-		if($cek > 0){
+		if(count($cek) > 0){
  
 			$data_session = array(
-				'nama' => $username,
+				'username' => $cek['username'],
+				'name' => $cek['name'],
+				'phone' => $cek['phone'],
 				'status' => "login",
 				);
  
