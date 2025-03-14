@@ -60,5 +60,8 @@ $route['logout'] =   'Auth/logout';
 
 // route admin
 $route['dashboard'] =   'Dashboard';
+$route['admin/users'] =   'User';
+$route['admin/users/add'] =   'User';
+$route['admin/users/edit'] =   'User';
 
 $route['forgot_password'] =   'User_auth/forgot';

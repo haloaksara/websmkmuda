@@ -1,12 +1,17 @@
-<footer class="py-4 bg-light mt-auto">
-	<div class="container-fluid px-4">
-		<div class="d-flex align-items-center justify-content-between small">
-			<div class="text-muted">Copyright &copy; Your Website 2023</div>
-			<div>
-				<a href="#">Privacy Policy</a>
-				&middot;
-				<a href="#">Terms &amp; Conditions</a>
-			</div>
+<footer class="footer">
+	<div class="container-fluid d-flex justify-content-between">
+		<nav class="pull-left">
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="nav-link" href="<?= site_url('') ?>">
+						SMK Muhammadiyah 2 Paleran
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="copyright">
+			2025, made with <i class="fa fa-heart heart text-danger"></i> by
+			<a href="<?= site_url('') ?>">SMK Muhammadiyah 2 Paleran</a>
 		</div>
 	</div>
 </footer>
