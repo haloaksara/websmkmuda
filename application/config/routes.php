@@ -68,3 +68,14 @@ $route['admin/users/list'] =   'User/list';
 $route['admin/users/add'] =   'User/add';
 $route['admin/users/edit/(:any)'] = 'User/edit/$1';
 // $route['admin/users/delete/(:any)'] = 'User/delete/$1';
+
+// route hak akses
+$route['admin/roles'] =   'Role';
+$route['admin/roles/list'] =   'Role/list';
+$route['admin/roles/add'] =   'Role/add';
+$route['admin/roles/edit/(:any)'] = 'Role/edit/$1';
+
+$route['admin/permissions'] =   'Permission';
+$route['admin/permissions/list'] =   'Permission/list';
+$route['admin/permissions/add'] =   'Permission/add';
+$route['admin/permissions/edit/(:any)'] = 'Permission/edit/$1';
