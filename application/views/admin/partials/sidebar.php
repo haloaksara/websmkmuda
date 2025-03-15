@@ -2,6 +2,7 @@
 $segment2 = $this->uri->segment(2);
 ?>
 
+<div class="main-panel">
 <div class="sidebar" data-background-color="dark">
 	<div class="sidebar-logo">
 		<!-- Logo Header -->

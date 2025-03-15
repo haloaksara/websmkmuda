@@ -1,91 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <?php $this->load->view('admin/partials/head.php'); ?>
-
-    <body class="sb-nav-fixed">
-        
-    <?php $this->load->view('admin/partials/navbar.php'); ?>
-
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-
-            <?php $this->load->view('admin/partials/sidebar.php'); ?>
-
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Product</h1>
-                        
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Edit Product
-                            </div>
-                            <div class="card-body">
-                                <form action="<?php echo base_url('produk/edit_action'); ?>" enctype="multipart/form-data" method="post">
-                                    <input type="text" value="<?= $product['id'] ?>" name="id">
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            <label for="code">Code</label>
-                                            <input type="text" class="form-control" placeholder="Code" name="code" value="<?= $product['code'] ?>">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control" placeholder="name" name="name" value="<?= $product['name'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            <label for="slug">Slug</label>
-                                            <input type="text" class="form-control" placeholder="slug" name="slug" value="<?= $product['slug'] ?>">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="price">Price</label>
-                                            <input type="number" class="form-control" placeholder="price" name="price" value="<?= $product['price'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            <label for="stock">Stock</label>
-                                            <input type="text" class="form-control" placeholder="stock" name="stock" value="<?= $product['stock'] ?>">
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="status">Status</label>
-                                            <input type="text" class="form-control" placeholder="status" name="status" value="<?= $product['status'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            <label for="image">Upload Image</label>
-                                            <input type="file" class="form-control" placeholder="image" name="image">
-                                            <label for="" style="font-size: small; color: red;">*Kosongi jika tidak diubah</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-12">
-                                            <label for="description">Description</label>
-                                            <textarea name="description" id="" class="form-control"><?= $product['description'] ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <input type="submit" value="Simpan" class="btn btn-primary">
-                                            <a href="javascript:history.go(-1)" class="btn btn-danger"> Kembali</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <!-- <h3 class="fw-bold mb-3"><?= $title ?></h3> -->
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><?= $breadcrumb1 ?></a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><?= $breadcrumb2 ?></a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title"><?= $title ?></h4>
                         </div>
                     </div>
-                </main>
-                
-                <?php $this->load->view('admin/partials/footer.php'); ?>
-
+                    <div class="card-body">
+                        <form action="<?= base_url('User/update') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" class="form-control" id="id" value="<?= $user->id ?>" name="id">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name">Nama Lengkap*</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="name" value="<?= $user->name ?>"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="email2">Email</label>
+                                        <input type="email" class="form-control" id="email2" placeholder="Enter Email" name="email" value="<?= $user->email ?>" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Enter Email" name="username" value="<?= $user->username ?>" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="phone">Telepon</label>
+                                        <input type="text" class="form-control" id="phone" placeholder="phone" name="phone" value="<?= $user->phone ?>"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Jenis Kelamin</label>
+                                        <select class="form-select" id="exampleFormControlSelect1" name="gender">
+                                            <option value="0" <?= $user->gender == 0 ? 'selected' : '' ?>>Perempuan</option>
+                                            <option value="1" <?= $user->gender == 1 ? 'selected' : '' ?>>Laki-laki</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Status</label>
+                                        <select class="form-select" id="exampleFormControlSelect2" name="is_active">
+                                            <option value="0" <?= $user->is_active == 0 ? 'selected' : '' ?>>Nonaktif</option>
+                                            <option value="1" <?= $user->is_active == 1 ? 'selected' : '' ?>>Aktif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="address">Alamat</label>
+                                        <textarea class="form-control" id="address" rows="5" name="address"><?= $user->address ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                                    <a href="<?= base_url('user/index') ?>" class="btn btn-warning mt-3">Batal</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <?php $this->load->view('admin/partials/js.php'); ?>
-    </body>
-</html>
+    </div>
+</div>

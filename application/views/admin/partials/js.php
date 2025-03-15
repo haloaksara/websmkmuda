@@ -26,14 +26,12 @@
 <script src="<?= base_url('assets/backend/') ?>js/plugin/jsvectormap/world.js"></script>
 
 <!-- Sweet Alert -->
-<script src="<?= base_url('assets/backend/') ?>js/plugin/sweetalert/sweetalert.min.js"></script>
+<!-- <script src="<?= base_url('assets/backend/') ?>js/plugin/sweetalert/sweetalert.min.js"></script> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Kaiadmin JS -->
 <script src="<?= base_url('assets/backend/') ?>js/kaiadmin.min.js"></script>
 
-<!-- Kaiadmin DEMO methods, don't include it in your project! -->
-<script src="<?= base_url('assets/backend/') ?>js/setting-demo.js"></script>
-<script src="<?= base_url('assets/backend/') ?>js/demo.js"></script>
 <script>
     $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
@@ -62,3 +60,6 @@
         fillColor: "rgba(255, 165, 52, .14)",
     });
 </script>
+
+</body>
+</html>

@@ -57,11 +57,14 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] =   'Auth/login';
 $route['register'] =   'Auth/register';
 $route['logout'] =   'Auth/logout';
+$route['forgot_password'] =   'User_auth/forgot';
 
 // route admin
 $route['dashboard'] =   'Dashboard';
-$route['admin/users'] =   'User';
-$route['admin/users/add'] =   'User';
-$route['admin/users/edit'] =   'User';
 
-$route['forgot_password'] =   'User_auth/forgot';
+// route user
+$route['admin/users'] =   'User';
+$route['admin/users/list'] =   'User/list';
+$route['admin/users/add'] =   'User/add';
+$route['admin/users/edit/(:any)'] = 'User/edit/$1';
+// $route['admin/users/delete/(:any)'] = 'User/delete/$1';
