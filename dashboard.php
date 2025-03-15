@@ -113,6 +113,9 @@
                             <a class="nav-link" href="berita/index.php">Data Berita</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="tugas/index.php">Data Tugas</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="">Data Siswa</a>
                         </li>
                         <li class="nav-item">
