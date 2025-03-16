@@ -1,7 +1,6 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <!-- <h3 class="fw-bold mb-3"><?= $title ?></h3> -->
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -28,7 +27,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title"><?= $title ?></h4>
-                            <a class="btn btn-primary btn-round ms-auto" href="<?= site_url('admin/users/add') ?>">
+                            <a class="btn btn-primary btn-round ms-auto" href="<?= site_url('admin/master/major/add') ?>">
                                 <i class="fa fa-plus"></i>
                                 Tambah Data
                             </a>
@@ -36,58 +35,14 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="userDataTable" class="display table table-striped table-hover" width="100%">
+                            <table id="dataTable" class="display table table-striped table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Telepon</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th width="5%">No</th>
+                                        <th width="75%">Nama Jurusan</th>
+                                        <th width="20%">Action</th>
                                     </tr>
                                 </thead>
-                                <!-- <tbody>
-                                    <?php 
-                                        $no = 1;
-                                        foreach($user as $u){ 
-                                    ?>
-                                    <tr>
-                                        <td><?= $u->name ?? '-'; ?></td>
-                                        <td><?= $u->email ?? '-'; ?></td>
-                                        <td><?= $u->phone ?? '-'; ?></td>
-                                        <td>
-                                            <?php
-                                                if ($u->gender == '0') {
-                                                    echo 'perempuan';
-                                                }elseif ($u->gender == '1') {
-                                                    echo 'laki-laki';
-                                                }else{
-                                                    echo '-';
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                        <?php
-                                                if ($u->is_active == '0') {
-                                                    echo 'non-aktif';
-                                                }elseif ($u->is_active == '1') {
-                                                    echo 'aktif';
-                                                }else{
-                                                    echo '-';
-                                                }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?= site_url('admin/users/edit/' . $u->id) ?>"
-                                                class="btn btn-warning btn-sm">Edit</a>
-
-                                            <a href="#" class="btn btn-danger btn-sm delete" data-id="<?= $u->id ?>">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
-                                </tbody> -->
                             </table>
                         </div>
                     </div>
@@ -99,18 +54,13 @@
 
 
 <script type="text/javascript">
-    
-    // $(document).ready(function () {
-    //     $("#userDataTable").DataTable({});
-    // });
-
     var save_method; //for save method string
     var table;
 
     $(document).ready(function() {
 
         //datatables
-        table = $('#userDataTable').DataTable({
+        table = $('#dataTable').DataTable({
             scrollX: true, // Pagination and other in head and footer fixed 
             fixedHeader: true,
             //scrollY: '500px',
@@ -128,7 +78,7 @@
 
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('admin/master/users/list') ?>",
+                "url": "<?php echo site_url('admin/master/major/list') ?>",
                 "type": "POST"
 
             },
@@ -172,7 +122,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     method: "POST",
-                    url: "<?php echo base_url('User/delete'); ?>",
+                    url: "<?php echo base_url('Major/delete'); ?>",
                     data: "id=" + id,
                     success: function(data) {
                         $("tr[data-id='" + id + "']").fadeOut("fast", function() {

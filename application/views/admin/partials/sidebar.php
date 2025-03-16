@@ -27,25 +27,94 @@ $segment2 = $this->uri->segment(2);
 	<div class="sidebar-wrapper scrollbar scrollbar-inner">
 		<div class="sidebar-content">
 			<ul class="nav nav-secondary">
+				<!-- menu dashboard -->
 				<li class="nav-item <?= $segment2 == '' ? 'active' : '' ?>">
 					<a href="<?= site_url('dashboard') ?>" class="nav-item">
 						<i class="fas fa-home"></i>
 						<p>Dashboard</p>
 					</a>
 				</li>
+
+				<!-- menu Master -->
+				<li class="nav-item <?= $segment2 == 'master' ? 'active' : '' ?>">
+					<a data-bs-toggle="collapse" href="#master">
+					<i class="	fas fa-bars"></i>
+						<p>Master</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="master">
+						<ul class="nav nav-collapse">
+							<li>
+								<a href="<?= site_url('admin/master/users') ?>">
+									<span class="sub-item">User</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?= site_url('admin/master/student') ?>" class="nav-item">
+								<span class="sub-item">Siswa</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?= site_url('admin/master/class') ?>" class="nav-item">
+								<span class="sub-item">Kelas</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?= site_url('admin/master/major') ?>" class="nav-item">
+								<span class="sub-item">Jurusan</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- menu user -->
 				<li class="nav-item <?= $segment2 == 'users' ? 'active' : '' ?>">
 					<a href="<?= site_url('admin/users') ?>" class="nav-item">
 						<i class="fas fa-users"></i>
 						<p>User</p>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a data-bs-toggle="collapse" href="#tables">
+
+				<!-- menu news -->
+				<li class="nav-item <?= $segment2 == 'news' ? 'active' : '' ?>">
+					<a href="<?= site_url('admin/news') ?>" class="nav-item">
+						<i class="fas fa-newspaper"></i>
+						<p>Berita</p>
+					</a>
+				</li>
+
+				<!-- menu pengumuman -->
+				<li class="nav-item <?= $segment2 == 'announcement' ? 'active' : '' ?>">
+					<a data-bs-toggle="collapse" href="#announcement">
+					<i class="	fas fa-bullhorn"></i>
+						<p>Pengumuman</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="announcement">
+						<ul class="nav nav-collapse">
+							<li>
+								<a href="<?= site_url('admin/announcement/private') ?>">
+									<span class="sub-item">Channel Private</span>
+								</a>
+							</li>
+							<li>
+								<a href="<?= site_url('admin/announcement/public') ?>">
+									<span class="sub-item">Channel Public</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<!-- menu roles -->
+				<li class="nav-item <?= $segment2 == 'roles' ? 'active' : '' ?>">
+					<a data-bs-toggle="collapse" href="#roles">
 						<i class="fas fa-lock"></i>
 						<p>Hak Akses</p>
 						<span class="caret"></span>
 					</a>
-					<div class="collapse" id="tables">
+					<div class="collapse" id="roles">
 						<ul class="nav nav-collapse">
 							<li>
 								<a href="<?= site_url('admin/roles') ?>">
@@ -53,13 +122,15 @@ $segment2 = $this->uri->segment(2);
 								</a>
 							</li>
 							<li>
-								<a href="<?= site_url('admin/roles') ?>">
+								<a href="<?= site_url('admin/permissions') ?>">
 									<span class="sub-item">Permission</span>
 								</a>
 							</li>
 						</ul>
 					</div>
 				</li>
+
+				<!-- menu settings -->
 				<li class="nav-item">
 					<a data-bs-toggle="collapse" href="#submenu">
 						<i class="fas fa-bars"></i>

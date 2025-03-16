@@ -13,6 +13,11 @@ class M_crud extends CI_Model{
             $this->db->where('id', $param['get_by_id']); //jika ya maka tambahkan klausa where berdasarkan id
         }
 
+         // cek apakah terdapat parameter get_by_custom
+        if (isset($param['get_by_custom']) && !is_null($param['get_by_custom'])) {
+            $this->db->where($param['custom_param'], $param['get_by_custom']); //jika ya maka tambahkan klausa where berdasarkan id
+        }
+
         // lakukan get data pada query dan masukkan dalam variable query
         $query = $this->db->get(); 
 

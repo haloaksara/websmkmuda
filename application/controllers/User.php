@@ -43,7 +43,7 @@ class User extends CI_Controller {
 		foreach ($list as $user) {
 			$no++;
 			$row = array();
-			$row[] = '<center>' . $no . '</center>';
+			$row[] = $no;
 
 			$row[] = $user->name;
 			$row[] = $user->email;
@@ -56,18 +56,18 @@ class User extends CI_Controller {
 				$gender = '-';
 			}
 
-			$row[] = '<center>' . $user->phone . '</center>';
-			$row[] = '<center>' . $gender . '</center>';
+			$row[] = $user->phone;
+			$row[] = $gender;
 			
 			if ($user->is_active == '1') {
 				$is_active = '<span class="badge rounded-pill bg-primary">Aktif</span>';
-			} else if ($user->is_active == '2') {
+			} else if ($user->is_active == '0') {
 				$is_active = '<span class="badge rounded-pill bg-warning">Tidak Aktif</span>';
 			}
 
-			$row[] = '<center>' . $is_active . '</center>';
+			$row[] = $is_active;
 
-			$row[] =  anchor('admin/users/edit/' . $user->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
+			$row[] =  anchor('admin/master/users/edit/' . $user->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
 			
 			'  <button class="btn btn-danger btn-sm delete" data-id=' . "'" . $user->id . "'" . '>Hapus</button>';
 			

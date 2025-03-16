@@ -63,11 +63,34 @@ $route['forgot_password'] =   'User_auth/forgot';
 $route['dashboard'] =   'Dashboard';
 
 // route user
-$route['admin/users'] =   'User';
-$route['admin/users/list'] =   'User/list';
-$route['admin/users/add'] =   'User/add';
-$route['admin/users/edit/(:any)'] = 'User/edit/$1';
-// $route['admin/users/delete/(:any)'] = 'User/delete/$1';
+$route['admin/master/users'] =   'User';
+$route['admin/master/users/list'] =   'User/list';
+$route['admin/master/users/add'] =   'User/add';
+$route['admin/master/users/edit/(:any)'] = 'User/edit/$1';
+
+// route student
+$route['admin/master/student'] =   'Student';
+$route['admin/master/student/list'] =   'Student/list';
+$route['admin/master/student/add'] =   'Student/add';
+$route['admin/master/student/edit/(:any)'] = 'Student/edit/$1';
+
+// route class
+$route['admin/master/class'] =   'ClassMaster';
+$route['admin/master/class/list'] =   'ClassMaster/list';
+$route['admin/master/class/add'] =   'ClassMaster/add';
+$route['admin/master/class/edit/(:any)'] = 'ClassMaster/edit/$1';
+
+// route major
+$route['admin/master/major'] =   'Major';
+$route['admin/master/major/list'] =   'Major/list';
+$route['admin/master/major/add'] =   'Major/add';
+$route['admin/master/major/edit/(:any)'] = 'Major/edit/$1';
+
+// route berita
+$route['admin/news'] =   'News';
+$route['admin/news/list'] =   'News/list';
+$route['admin/news/add'] =   'News/add';
+$route['admin/news/edit/(:any)'] = 'News/edit/$1';
 
 // route hak akses
 $route['admin/roles'] =   'Role';
