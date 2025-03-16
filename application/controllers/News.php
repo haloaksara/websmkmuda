@@ -8,7 +8,7 @@ class News extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->model('m_crud');
-
+		date_default_timezone_set('Asia/Jakarta');
 		check_not_login();
 	}
 
@@ -238,9 +238,7 @@ class News extends CI_Controller {
 			'id'     => $id,
 		];
 
-		
-
-		$result = $this->m_crud->delete('users', $where);
+		$result = $this->m_crud->delete('news', $where);
         
         if ($result > 0) {
 			$out['status'] = 'berhasil';
