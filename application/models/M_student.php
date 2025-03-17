@@ -45,4 +45,8 @@ class M_student extends CI_Model{
         $this->db->where($where);
 		$this->db->delete($table);
     }
+
+    public function add_batch($data) {
+		return $this->db->insert_batch($this->table, $data);
+	}
 }

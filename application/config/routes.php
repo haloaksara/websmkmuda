@@ -73,6 +73,7 @@ $route['admin/master/student'] =   'Student';
 $route['admin/master/student/list'] =   'Student/list';
 $route['admin/master/student/add'] =   'Student/add';
 $route['admin/master/student/edit/(:any)'] = 'Student/edit/$1';
+$route['admin/master/student/import'] = 'Student/import';
 
 // route class
 $route['admin/master/class'] =   'ClassMaster';
