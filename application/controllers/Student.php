@@ -34,6 +34,8 @@ class Student extends CI_Controller {
 		$data['title'] = 'Data Siwa';
 		$data['breadcrumb1'] = 'Siwa';
 		$data['breadcrumb2'] = 'Data Siwa';
+		$data['class'] = $this->m_crud->getData('class')->result();
+		$data['major'] = $this->m_crud->getData('major')->result();
 
 		$this->loadContent('admin/student/index', $data);
 	}
@@ -269,117 +271,63 @@ class Student extends CI_Controller {
     }
 
 	public function import() {
-		// var_dump($_FILES); die;
+		$session = $this->session->userdata('email');
+		$param = [
+			'custom_param' => 'email',
+			'get_by_custom' => $session
+		];
+		$session = $this->m_crud->getData('users', $param)->row();
+
 		// buatkan kode untuk import data dari excel dari inputan ajax di halaman student
 		if (isset($_FILES['import_file']['name'])) {
 			$path = $_FILES['import_file']['tmp_name'];
 			$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
 			$spreadsheet = $reader->load($path);
-			$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-			// var_dump($sheetData); die;
+			$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true, true);
 
 			$data = [];
 			foreach ($sheetData as $key => $value) {
 				if ($key == 1) continue; // Skip header row
+				$data_user = [
+					'name' => $value['C'] ?? null,
+					'username' => $value['A'] ?? null,
+					'password' => sha1($value['A']) ?? null,
+					'phone' => $value['G'] ?? null,
+					'gender' => $value['D'] ?? null,
+					'is_active' => 1,
+					'created_at' => date('Y-m-d H:i:s')
+				];
+				$this->m_crud->input($data_user, 'users');
+				$user_id = $this->db->insert_id();
+
 				$data[] = [
-					'nis' => $value['A'],
-					// 'nis' => $value['A'],
-					// 'nisn' => $value['B'],
-					// 'full_name' => $value['C'],
-					// 'gender' => $value['D'],
-					// 'place_of_birth' => $value['E'],
-					// 'date_of_birth' => $value['F'],
-					// 'address' => $value['G'],
-					// 'phone' => $value['H'],
-					// 'email' => $value['I'],
-					// 'class_id' => $value['J'],
-					// 'major_id' => $value['K'],
-					// 'status' => $value['L'],
-					// 'mother_name' => $value['M'],
-					// 'mother_phone' => $value['N'],
-					// 'mother_job' => $value['O'],
-					// 'father_name' => $value['P'],
-					// 'father_job' => $value['Q'],
-					// 'father_phone' => $value['R'],
-					// 'created_at' => date('Y-m-d H:i:s'),
-					// 'created_by' => $this->session->userdata('user_id')
+					'user_id' => $user_id,
+					'class_id' => $_POST['class_id'],
+					'major_id' => $_POST['major_id'],
+					'status' => 1,
+					'nis' => $value['A'] ?? null,
+					'nisn' => $value['B'] ?? null,
+					'full_name' => $value['C'] ?? null,
+					'gender' => $value['D'] ?? null,
+					'place_of_birth' => $value['E'] ?? null,
+					'date_of_birth' => $value['F'] ?? null,
+					'phone' => $value['G'] ?? null,
+					'mother_name' => $value['H'] ?? null,
+					'father_name' => $value['I'] ?? null,
+					'created_at' => date('Y-m-d H:i:s'),
+					'created_by' => $session->id
 				];
 			}
-			var_dump($data); die;
 
-			// $this->m_student->add_batch($data);
+			// input data ke database tb student
+			$this->m_student->add_batch('student', $data);
+
 			$out['status'] = 'berhasil';
 		} else {
 			$out['status'] = 'gagal';
 		}
 
-		// $path 		= '.upload/import/';
-		// $json 		= [];
-		// $this->upload_config($path);
-		// if (!$this->upload->do_upload('import_file')) {
-		// 	$json = [
-		// 		'error_message' => 'gagal',
-		// 	];
-		// 	var_dump($json); die;
-		// } else {
-		// 	$file_data 	= $this->upload->data();
-		// 	$file_name 	= $path.$file_data['file_name'];
-		// 	$arr_file 	= explode('.', $file_name);
-		// 	$extension 	= end($arr_file);
-		// 	if('csv' == $extension) {
-		// 		$reader 	= new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-		// 	} else {
-		// 		$reader 	= new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-		// 	}
-		// 	$spreadsheet 	= $reader->load($file_name);
-		// 	$sheet_data 	= $spreadsheet->getActiveSheet()->toArray();
-		// 	$list 			= [];
-		// 	foreach($sheet_data as $key => $val) {
-		// 		if($key != 0) {
-		// 			$result 	= $this->user->get(["country_code" => $val[2], "mobile" => $val[3]]);
-		// 			if($result) {
-		// 			} else {
-		// 				$list [] = [
-		// 					'name'					=> $val[0],
-		// 					'country_code'			=> $val[1],
-		// 					'mobile'				=> $val[2],
-		// 					'email'					=> $val[3],
-		// 					'city'					=> $val[4],
-		// 					'ip_address'			=> $this->ip_address,
-		// 					'created_at' 			=> $this->datetime,
-		// 					'status'				=> "1",
-		// 				];
-		// 			}
-		// 		}
-		// 	}
-		// 	var_dump($list); die;
-		// 	if(file_exists($file_name))
-		// 		unlink($file_name);
-		// 	if(count($list) > 0) {
-		// 		$result 	= $this->m_student->add_batch($list);
-		// 		if($result) {
-		// 			$json = [
-		// 				'success_message' 	=> showSuccessMessage("All Entries are imported successfully."),
-		// 			];
-		// 		} else {
-		// 			$json = [
-		// 				'error_message' 	=> showErrorMessage("Something went wrong. Please try again.")
-		// 			];
-		// 		}
-		// 	} else {
-		// 		$json = [
-		// 			'error_message' => showErrorMessage("No new record is found."),
-		// 		];
-		// 	}
-		// }
-
-		// if ($result > 0) {
-		// 	$out['status'] = 'berhasil';
-		// } else {
-		// 	$out['status'] = 'gagal';
-		// }
-
-		// echo json_encode($json);
+		echo json_encode($out);
 	}
 
 	public function upload_config($path) {

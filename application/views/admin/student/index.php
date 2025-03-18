@@ -70,6 +70,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="class_id">Kelas</label>
+                        <select name="class_id" id="class_id" class="form-select">
+                            <?php foreach ($class as $row) : ?>
+                                <option value="<?= $row->id ?>"><?= $row->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="major_id">Kelas</label>
+                        <select name="major_id" id="major_id" class="form-select">
+                            <?php foreach ($major as $row) : ?>
+                                <option value="<?= $row->id ?>"><?= $row->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="">Impor Data di sini:</label>
                         <input type="file" class="form-control" name="import_file" required>
                         <br>
@@ -78,7 +94,7 @@
                             yang disediakan. Untuk mendapatkan template, silakan dowload melalui tombol download format
                             import
                             dibawah. <br>
-                            <a href="#">di sini</a>
+                            <a href="<?= base_url('upload/import_siswa.xlsx') ?>">di sini</a>
 
                             Data yang harus diisi antara lain "NIS", "Nama Siswa", "Kelas", "Jurusan", "Tanggal Lahir",
                             "Jenkel"</small>
@@ -230,51 +246,6 @@
 </script>
 
 <script>
-    // $('#excel-submit').submit(function(e) { 
-    //     e.preventDefault();
-    //     var formData = new FormData(this);
-    //     Swal.fire({
-    //         title: 'Sedang di proses',
-    //         allowEscapeKey: false,
-    //         allowOutsideClick: false,
-    //         onOpen: () => {
-    //             Swal.showLoading();
-    //         }
-    //     });
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: "<?= site_url('admin/master/student/import') ?>",
-    //         data: formData,
-    //         cache: false,
-    //         contentType: false,
-    //         processData: false,
-    //         success: (data) => {
-    //             this.reset();
-    //             $('#modal-import').modal('hide');
-    //             if (data.status == true) {
-    //                 $('#content').html(data.data);
-    //                 $('#dataTablePreviewExcel').DataTable({
-    //                     info: false,
-    //                     scrollY: "300px",
-    //                     scrollX: true,
-    //                     scrollCollapse: true,
-    //                     paging: false
-    //                 });
-    //                 $('#modal-excel-preview').modal('show');
-    //                 Swal.close()
-    //             } else {
-    //                 Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
-    //             }
-    //         },
-    //         error: function(data) {
-    //             Swal.fire("Oops...", "Ada Sesuatu yang Salah :(", "error");
-    //         }
-    //     });
-    // });
-
-</script>
-
-<script>
     $(document).ready(function() {
         $('#excel-submit').submit(function(e) { 
             e.preventDefault();
@@ -294,13 +265,15 @@
             cache: false,
             contentType: false,
             processData: false,
+            dataType: 'json',  // Tambahkan ini
             success: (data) => {
                 this.reset();
+
                 $('#modal-import').modal('hide');
-                if (data.status == true) {
-                import_berhasil();
+                if (data.status == 'berhasil') {
+                    import_berhasil();
                 } else {
-                Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
+                    Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
                 }
             },
             error: function(data) {
@@ -308,29 +281,5 @@
             }
             });
         });
-        // $('#excel-submit').submit(function(e) { 
-        //     e.preventDefault();
-        //     var data = new FormData(this);
-        //     $.ajax({
-        //         type: 'POST',
-        //         method: 'POST',
-        //         url: "<?= site_url('admin/master/student/import') ?>",
-        //         data: data,
-        //         cache: false,
-        //         processData: false,
-        //         contentType: false,
-        //         success: (data) => {
-        //             $('#modal-excel-preview').modal('hide');
-        //             if (data.status == true) {
-        //                 import_berhasil();  
-        //             } else {
-        //                 Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
-        //             }
-        //         },
-        //         error: function (data) {
-        //             Swal.fire("Oops...", "Ada Sesuatu yang Salah :(", "error");
-        //         }
-        //     });
-        // });
     });
 </script>
