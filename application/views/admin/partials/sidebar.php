@@ -69,10 +69,10 @@ $segment2 = $this->uri->segment(2);
 				</li>
 
 				<!-- menu user -->
-				<li class="nav-item <?= $segment2 == 'users' ? 'active' : '' ?>">
-					<a href="<?= site_url('admin/users') ?>" class="nav-item">
-						<i class="fas fa-users"></i>
-						<p>User</p>
+				<li class="nav-item <?= $segment2 == 'gallery' ? 'active' : '' ?>">
+					<a href="<?= site_url('admin/gallery') ?>" class="nav-item">
+						<i class="fas fa-images"></i>
+						<p>Galeri</p>
 					</a>
 				</li>
 

@@ -93,6 +93,12 @@ $route['admin/news/list'] =   'News/list';
 $route['admin/news/add'] =   'News/add';
 $route['admin/news/edit/(:any)'] = 'News/edit/$1';
 
+// route galeri
+$route['admin/gallery'] =   'Gallery';
+$route['admin/gallery/list'] =   'Gallery/list';
+$route['admin/gallery/add'] =   'Gallery/add';
+$route['admin/gallery/edit/(:any)'] = 'Gallery/edit/$1';
+
 // route hak akses
 $route['admin/roles'] =   'Role';
 $route['admin/roles/list'] =   'Role/list';
