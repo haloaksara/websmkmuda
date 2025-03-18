@@ -64,11 +64,24 @@ $segment2 = $this->uri->segment(2);
 								<span class="sub-item">Jurusan</span>
 								</a>
 							</li>
+							<li>
+								<a href="<?= site_url('admin/master/file_type') ?>" class="nav-item">
+								<span class="sub-item">Jenis File</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
 
-				<!-- menu user -->
+				<!-- menu File Siswa -->
+				<li class="nav-item <?= $segment2 == 'student_file' ? 'active' : '' ?>">
+					<a href="<?= site_url('admin/student_file') ?>" class="nav-item">
+						<i class="fas fa-book"></i>
+						<p>File Siswa</p>
+					</a>
+				</li>
+
+				<!-- menu Galeri -->
 				<li class="nav-item <?= $segment2 == 'gallery' ? 'active' : '' ?>">
 					<a href="<?= site_url('admin/gallery') ?>" class="nav-item">
 						<i class="fas fa-images"></i>

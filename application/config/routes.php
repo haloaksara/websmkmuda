@@ -99,6 +99,17 @@ $route['admin/gallery/list'] =   'Gallery/list';
 $route['admin/gallery/add'] =   'Gallery/add';
 $route['admin/gallery/edit/(:any)'] = 'Gallery/edit/$1';
 
+// route attachment
+$route['admin/master/file_type'] =   'FileType';
+$route['admin/master/file_type/list'] =   'FileType/list';
+$route['admin/master/file_type/add'] =   'FileType/add';
+$route['admin/master/file_type/edit/(:any)'] = 'FileType/edit/$1';
+
+// route student file
+$route['admin/student_file'] =   'StudentFile';
+$route['admin/student_file/list'] =   'StudentFile/list';
+$route['admin/student_file/upload_file'] =   'StudentFile/upload_file';
+
 // route hak akses
 $route['admin/roles'] =   'Role';
 $route['admin/roles/list'] =   'Role/list';
