@@ -69,6 +69,11 @@ $segment2 = $this->uri->segment(2);
 								<span class="sub-item">Jenis File</span>
 								</a>
 							</li>
+							<li>
+								<a href="<?= site_url('admin/master/exam_type') ?>" class="nav-item">
+								<span class="sub-item">Jenis Ujian</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
@@ -107,12 +112,12 @@ $segment2 = $this->uri->segment(2);
 					<div class="collapse" id="announcement">
 						<ul class="nav nav-collapse">
 							<li>
-								<a href="<?= site_url('admin/announcement/private') ?>">
+								<a href="<?= site_url('admin/announcement?type=private') ?>">
 									<span class="sub-item">Channel Private</span>
 								</a>
 							</li>
 							<li>
-								<a href="<?= site_url('admin/announcement/public') ?>">
+								<a href="<?= site_url('admin/announcement?type=public') ?>">
 									<span class="sub-item">Channel Public</span>
 								</a>
 							</li>

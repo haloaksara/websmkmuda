@@ -105,10 +105,22 @@ $route['admin/master/file_type/list'] =   'FileType/list';
 $route['admin/master/file_type/add'] =   'FileType/add';
 $route['admin/master/file_type/edit/(:any)'] = 'FileType/edit/$1';
 
+// route exam_type
+$route['admin/master/exam_type'] =   'ExamType';
+$route['admin/master/exam_type/list'] =   'ExamType/list';
+$route['admin/master/exam_type/add'] =   'ExamType/add';
+$route['admin/master/exam_type/edit/(:any)'] = 'ExamType/edit/$1';
+
 // route student file
 $route['admin/student_file'] =   'StudentFile';
 $route['admin/student_file/list'] =   'StudentFile/list';
 $route['admin/student_file/upload_file'] =   'StudentFile/upload_file';
+
+// route announcement
+$route['admin/announcement'] =   'Announcement';
+$route['admin/announcement/list'] =   'Announcement/list';
+$route['admin/announcement/add'] =   'Announcement/add';
+$route['admin/announcement/edit/(:any)'] = 'Announcement/edit/$1';
 
 // route hak akses
 $route['admin/roles'] =   'Role';
