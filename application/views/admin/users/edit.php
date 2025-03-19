@@ -82,6 +82,20 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect3">Role</label>
+                                        <select class="form-select" id="exampleFormControlSelect3" name="role_id">
+                                            <?php foreach ($role as $r) : ?>
+                                                <?php if ($user_role->role_id != null) {?>
+                                                    <option value="<?= $r->id ?>" <?= $user_role->user_id == $r->id ? 'selected' : '' ; ?>><?= $r->name ?></option>
+                                                <?php }else{ ?>
+                                                    <option value="<?= $r->id ?>"><?= $r->name ?></option>
+                                                <?php } ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="address">Alamat</label>

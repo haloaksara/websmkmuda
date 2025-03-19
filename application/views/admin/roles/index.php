@@ -40,7 +40,8 @@
                                 <thead>
                                     <tr>
                                         <th width="5%">No</th>
-                                        <th width="75%">Nama</th>
+                                        <th width="30%">Nama</th>
+                                        <th width="45%">Akses</th>
                                         <th width="20%">Action</th>
                                     </tr>
                                 </thead>

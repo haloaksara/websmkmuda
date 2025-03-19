@@ -81,6 +81,16 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect3">Role</label>
+                                        <select class="form-select" id="exampleFormControlSelect3" name="role_id">
+                                            <?php foreach ($role as $r) : ?>
+                                                <option value="<?= $r->id ?>"><?= $r->name ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="address">Alamat</label>
@@ -90,7 +100,7 @@
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                                    <a href="<?= base_url('user/index') ?>" class="btn btn-warning mt-3">Batal</a>
+                                    <a href="<?= site_url('admin/master/user') ?>" class="btn btn-warning mt-3">Batal</a>
                                     </div>
                                 </div>
                             </div>

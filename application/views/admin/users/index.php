@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <h4 class="card-title"><?= $title ?></h4>
-                            <a class="btn btn-primary btn-round ms-auto" href="<?= site_url('admin/users/add') ?>">
+                            <a class="btn btn-primary btn-round ms-auto" href="<?= site_url('admin/master/users/add') ?>">
                                 <i class="fa fa-plus"></i>
                                 Tambah Data
                             </a>

@@ -150,6 +150,13 @@ class Student extends CI_Controller {
 		
 		$user_id = $this->db->insert_id();
 
+		// insert user_has_role
+		$data_user_role = array(
+			'user_id' => $user_id,
+			'role_id' => 3
+		);
+		$this->m_crud->input($data_user_role, 'user_has_role');
+
 		// buat array data untuk disimpan ke database tb student
 		$data = array(
 			'user_id' => $user_id,
@@ -299,6 +306,13 @@ class Student extends CI_Controller {
 				];
 				$this->m_crud->input($data_user, 'users');
 				$user_id = $this->db->insert_id();
+
+				// insert user_has_role
+				$data_user_role = array(
+					'user_id' => $user_id,
+					'role_id' => 3
+				);
+				$this->m_crud->input($data_user_role, 'user_has_role');
 
 				$data[] = [
 					'user_id' => $user_id,

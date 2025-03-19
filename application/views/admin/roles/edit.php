@@ -37,13 +37,36 @@
                                 <div class="col-md-6 col-lg-4">
                                     <div class="form-group">
                                         <label for="name">Nama</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="name" value="<?= $roles->name ?>" required/>
+                                        <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="name" value="<?= $roles->name ?>" readonly/>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <table>
+                                        <tr>
+                                            <td width="20%">
+                                                <label for="name">Akses</label>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <?php foreach ($permissions as $permission) : ?>
+                                                        <li>
+                                                            <input type="checkbox" name="permission[]" value="<?= $permission->id ?>" <?= in_array($permission->id, array_column($role_permissions, 'permission_id')) ? 'checked' : '' ?>>
+                                                            <?= $permission->name ?>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                    
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                                    <a href="<?= base_url('role/index') ?>" class="btn btn-warning mt-3">Batal</a>
+                                    <a href="<?= site_url('admin/role') ?>" class="btn btn-warning mt-3">Batal</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,15 @@
 <?php
 $segment2 = $this->uri->segment(2);
+
+$role_id = $this->session->userdata('permission');
+$sql = "SELECT 
+			role_has_permission.*,
+			permission.name 
+		FROM role_has_permission 
+		LEFT JOIN permission ON role_has_permission.permission_id = permission.id
+		WHERE role_has_permission.role_id = " . $role_id;
+$user_role = $this->db->query($sql)->result_array();
+// var_dump($user_role);die;
 ?>
 
 <div class="main-panel">
@@ -44,65 +54,89 @@ $segment2 = $this->uri->segment(2);
 					</a>
 					<div class="collapse" id="master">
 						<ul class="nav nav-collapse">
+							<?php if (in_array('users', array_column($user_role, 'name'))) : ?>
 							<li>
 								<a href="<?= site_url('admin/master/users') ?>">
 									<span class="sub-item">User</span>
 								</a>
 							</li>
+							<?php endif; ?>
+
+							<?php if (in_array('student', array_column($user_role, 'name'))) : ?>
 							<li>
-								<a href="<?= site_url('admin/master/student') ?>" class="nav-item">
-								<span class="sub-item">Siswa</span>
+								<a href="<?= site_url('admin/master/student') ?>">
+									<span class="sub-item">Siswa</span>
 								</a>
 							</li>
+							<?php endif; ?>
+							
+							<?php if (in_array('class', array_column($user_role, 'name'))) : ?>
 							<li>
-								<a href="<?= site_url('admin/master/class') ?>" class="nav-item">
-								<span class="sub-item">Kelas</span>
+								<a href="<?= site_url('admin/master/class') ?>">
+									<span class="sub-item">Kelas</span>
 								</a>
 							</li>
+							<?php endif; ?>
+							
+							<?php if (in_array('major', array_column($user_role, 'name'))) : ?>
 							<li>
-								<a href="<?= site_url('admin/master/major') ?>" class="nav-item">
-								<span class="sub-item">Jurusan</span>
+								<a href="<?= site_url('admin/master/major') ?>">
+									<span class="sub-item">Jurusan</span>
 								</a>
 							</li>
+							<?php endif; ?>
+
+							<?php if (in_array('file_type', array_column($user_role, 'name'))) : ?>
 							<li>
-								<a href="<?= site_url('admin/master/file_type') ?>" class="nav-item">
-								<span class="sub-item">Jenis File</span>
+								<a href="<?= site_url('admin/master/file_type') ?>">
+									<span class="sub-item">Jenis File</span>
 								</a>
 							</li>
+							<?php endif; ?>
+
+							<?php if (in_array('exam_type', array_column($user_role, 'name'))) : ?>
 							<li>
-								<a href="<?= site_url('admin/master/exam_type') ?>" class="nav-item">
-								<span class="sub-item">Jenis Ujian</span>
+								<a href="<?= site_url('admin/master/exam_type') ?>">
+									<span class="sub-item">Jenis Ujian</span>
 								</a>
 							</li>
+							<?php endif; ?>
 						</ul>
 					</div>
 				</li>
 
 				<!-- menu File Siswa -->
+				<?php if (in_array('student_file', array_column($user_role, 'name'))) : ?>
 				<li class="nav-item <?= $segment2 == 'student_file' ? 'active' : '' ?>">
 					<a href="<?= site_url('admin/student_file') ?>" class="nav-item">
 						<i class="fas fa-book"></i>
 						<p>File Siswa</p>
 					</a>
 				</li>
+				<?php endif; ?>
 
 				<!-- menu Galeri -->
+				<?php if (in_array('gallery', array_column($user_role, 'name'))) : ?>
 				<li class="nav-item <?= $segment2 == 'gallery' ? 'active' : '' ?>">
 					<a href="<?= site_url('admin/gallery') ?>" class="nav-item">
 						<i class="fas fa-images"></i>
 						<p>Galeri</p>
 					</a>
 				</li>
+				<?php endif; ?>
 
 				<!-- menu news -->
+				<?php if (in_array('news', array_column($user_role, 'name'))) : ?>
 				<li class="nav-item <?= $segment2 == 'news' ? 'active' : '' ?>">
 					<a href="<?= site_url('admin/news') ?>" class="nav-item">
 						<i class="fas fa-newspaper"></i>
 						<p>Berita</p>
 					</a>
 				</li>
+				<?php endif; ?>
 
 				<!-- menu pengumuman -->
+				<?php if (in_array('announcement', array_column($user_role, 'name'))) : ?>
 				<li class="nav-item <?= $segment2 == 'announcement' ? 'active' : '' ?>">
 					<a data-bs-toggle="collapse" href="#announcement">
 					<i class="	fas fa-bullhorn"></i>
@@ -124,8 +158,10 @@ $segment2 = $this->uri->segment(2);
 						</ul>
 					</div>
 				</li>
+				<?php endif; ?>
 
 				<!-- menu roles -->
+				<?php if (in_array('roles', array_column($user_role, 'name'))) : ?>
 				<li class="nav-item <?= $segment2 == 'roles' ? 'active' : '' ?>">
 					<a data-bs-toggle="collapse" href="#roles">
 						<i class="fas fa-lock"></i>
@@ -147,9 +183,10 @@ $segment2 = $this->uri->segment(2);
 						</ul>
 					</div>
 				</li>
+				<?php endif; ?>
 
 				<!-- menu settings -->
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a data-bs-toggle="collapse" href="#submenu">
 						<i class="fas fa-bars"></i>
 						<p>Menu Levels</p>
@@ -200,7 +237,7 @@ $segment2 = $this->uri->segment(2);
 						</ul>
 					</div>
 				</li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 </div>

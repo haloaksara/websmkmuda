@@ -88,6 +88,7 @@ class User extends CI_Controller {
 		$data['title'] = 'Tambah Data Pengguna';
 		$data['breadcrumb1'] = 'Pengguna';
 		$data['breadcrumb2'] = 'Tambah Data Pengguna';
+		$data['role'] = $this->m_crud->getData('roles')->result();
 
 		$this->loadContent('admin/users/add', $data);
 	}
@@ -102,6 +103,7 @@ class User extends CI_Controller {
 		$gender 	= $this->input->post('gender');
 		$address 	= $this->input->post('address');
 		$status 	= $this->input->post('is_active');
+		$role_id 	= $this->input->post('role_id');
 
 		$data = array(
 			'name' => $name,
@@ -116,7 +118,16 @@ class User extends CI_Controller {
 		);
 
 		$this->m_crud->input($data, 'users');
-		redirect('User');	
+		$user_id = $this->db->insert_id();
+
+		// insert role
+		$data_role = array(
+			'user_id' => $user_id,
+			'role_id' => $role_id
+		);
+		$this->m_crud->input($data_role, 'user_has_role');
+
+		redirect(site_url('admin/master/users'));	
 	}
 
 	public function edit($id)
@@ -127,6 +138,9 @@ class User extends CI_Controller {
 
 		$param = ['get_by_id' => $id];
 		$data['user'] = $this->m_crud->getData('users', $param)->row();
+		$params = ['user_id' => $id];
+		$data['user_role'] = $this->m_crud->getData('user_has_role', $params)->row();
+		$data['role'] = $this->m_crud->getData('roles')->result();
 
 		$this->loadContent('admin/users/edit', $data);
 	}
@@ -145,6 +159,7 @@ class User extends CI_Controller {
 		$gender 	= $this->input->post('gender');
 		$address 	= $this->input->post('address');
 		$status 	= $this->input->post('is_active');
+		$role_id 	= $this->input->post('role_id');
 		
 		if (isset($password) && !empty($password)) {
 			$password = sha1($password);
@@ -170,6 +185,20 @@ class User extends CI_Controller {
 		];
 
 		$this->m_crud->update('users', $data, $where);
+
+		// delete role
+		$user_has_role = $this->m_crud->getData('user_has_role', ['user_id' => $id])->row();
+		if ($user_has_role) {
+			$this->m_crud->delete('user_has_role', ['user_id' => $id]);
+		}
+
+		// insert role
+		$data_role = array(
+			'user_id' => $id,
+			'role_id' => $role_id
+		);
+		$this->m_crud->input($data_role, 'user_has_role');
+
 		redirect('User');
 	}
 
@@ -182,7 +211,6 @@ class User extends CI_Controller {
 		];
 
 		
-
 		$result = $this->m_crud->delete('users', $where);
         
         if ($result > 0) {

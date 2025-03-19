@@ -14,8 +14,24 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	public function loadContent($page, $data = [])
+	{
+		$this->load->view('admin/partials/head', $data);
+		$this->load->view('admin/partials/sidebar', $data);
+		$this->load->view('admin/partials/navbar', $data);
+
+		$this->load->view('admin/partials/js', $data);
+		$this->load->view($page, $data);
+
+		$this->load->view('admin/partials/footer', $data);
+	}
+
 	public function index()
 	{
-		$this->load->view('admin/home');
+		$data['title'] = 'Data Kelas';
+		$data['breadcrumb1'] = 'Kelas';
+		$data['breadcrumb2'] = 'Data Kelas';
+
+		$this->loadContent('admin/home', $data);
 	}
 }

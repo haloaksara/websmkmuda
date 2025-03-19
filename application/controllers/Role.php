@@ -38,16 +38,35 @@ class Role extends CI_Controller {
 		$list = $this->m_crud->getData('roles')->result();
 		$data = array();
 		$no = @$_POST['start'];
-		foreach ($list as $user) {
+
+		foreach ($list as $dt) {
+			
+			$sql = "SELECT 
+						role_has_permission.*,
+						permission.name 
+					FROM role_has_permission 
+					LEFT JOIN permission ON role_has_permission.permission_id = permission.id
+					WHERE role_has_permission.role_id = " . $dt->id;
+
+			$data_permission = $this->db->query($sql)->result();
+
 			$no++;
 			$row = array();
 			$row[] = $no;
 
-			$row[] = $user->name;
+			$row[] = $dt->name;
+
+			$permission = '<ul>';
+			foreach ($data_permission as $key => $value) {
+				$permission .= '<li>' . $value->name . '</li>';
+			}
+			$permission .= '</ul>';
+
+			$row[] = $permission;
 			
-			$row[] =  anchor('admin/roles/edit/' . $user->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
+			$row[] =  anchor('admin/roles/edit/' . $dt->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
 			
-			'  <button class="btn btn-danger btn-sm delete" data-id=' . "'" . $user->id . "'" . '>Hapus</button>';
+			'  <button class="btn btn-danger btn-sm delete" data-id=' . "'" . $dt->id . "'" . '>Hapus</button>';
 			
 			$data[] = $row;
 		}
@@ -90,25 +109,31 @@ class Role extends CI_Controller {
 
 		$param = ['get_by_id' => $id];
 		$data['roles'] = $this->m_crud->getData('roles', $param)->row();
+		$data['permissions'] = $this->m_crud->getData('permission')->result();
+		$data['role_permissions'] = $this->m_crud->getData('role_has_permission', ['custom_param' => 'role_id', 'get_by_custom' => $id])->result_array();
 
 		$this->loadContent('admin/roles/edit', $data);
 	}
 
 	public function update() 
 	{
-		$id 	= $this->input->post('id');
-		$name 	= $this->input->post('name');
+		$permission 	= $this->input->post('permission');
+		$id 			= $this->input->post('id');
 
-		$data = array(
-			'name' => $name,
-		);
+		// hapus data lama
+		$this->m_crud->delete('role_has_permission', ['role_id' => $id]);
 
-		$where = [
-			'id' => $id
-		];
+		// insert data baru
+		foreach ($permission as $key => $value) {
+			$data = [
+				'role_id' => $id,
+				'permission_id' => $value
+			];
 
-		$this->m_crud->update('roles', $data, $where);
-		redirect('Role');
+			$this->m_crud->input($data, 'role_has_permission');
+		}
+		
+		redirect(site_url('admin/roles'));
 	}
 
 	public function delete() 

@@ -8,6 +8,7 @@ class Auth extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');		
 		$this->load->model('m_auth');
+		$this->load->model('m_crud');
 	}
 
 	public function index()
@@ -39,12 +40,18 @@ class Auth extends CI_Controller {
 		$cek = $this->m_auth->cek_login("users",$where)->row_array();
 
 		if(count($cek) > 0){
- 
+			$param			= [
+				'custom_param' => 'user_id',
+				'get_by_custom' => $cek['id']
+			];
+			$user_has_role = $this->m_crud->getData('user_has_role', $param)->row_array();
+
 			$data_session = array(
 				'username' => $cek['username'],
 				'name' => $cek['name'],
 				'phone' => $cek['phone'],
 				'status' => "login",
+				'permission' => $user_has_role['role_id']
 				);
  
 			$this->session->set_userdata($data_session);
