@@ -121,6 +121,7 @@ $route['admin/announcement'] =   'Announcement';
 $route['admin/announcement/list'] =   'Announcement/list';
 $route['admin/announcement/add'] =   'Announcement/add';
 $route['admin/announcement/edit/(:any)'] = 'Announcement/edit/$1';
+$route['admin/announcement/import'] = 'Announcement/import';
 
 // route hak akses
 $route['admin/roles'] =   'Role';

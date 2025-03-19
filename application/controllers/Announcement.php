@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Announcement extends CI_Controller {
 	
@@ -55,7 +59,7 @@ class Announcement extends CI_Controller {
 
 			if ($type == 'private') {
 				$row[] = $dt->title;
-				$row[] = substr($dt->description, 0, 100) . '...';
+				$row[] = substr($dt->description, 0, 100) . '...' ?? '-';
 				if ($dt->status_exam == 0) {
 					$row[] = 'Tidak Lulus';
 				}elseif($dt->status_exam == 1){
@@ -277,4 +281,51 @@ class Announcement extends CI_Controller {
 			$out['status'] = 'gagal';
 		}
     }
+
+	public function import() {
+		$session = $this->session->userdata('email');
+		$param = [
+			'custom_param' => 'email',
+			'get_by_custom' => $session
+		];
+		$session = $this->m_crud->getData('users', $param)->row();
+
+		// buatkan kode untuk import data dari excel dari inputan ajax di halaman student
+		if (isset($_FILES['import_file']['name'])) {
+			$path = $_FILES['import_file']['tmp_name'];
+			$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($path);
+			$spreadsheet = $reader->load($path);
+			$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true, true);
+
+			$data = [];
+			foreach ($sheetData as $key => $value) {
+				if ($key == 1) continue; // Skip header row
+				$param = [
+					'get_by_custom' => $value['A'], 
+					'custom_param' => 'nis'
+				];
+				$student = $this->m_crud->getData('student', $param)->row();
+
+				$data[] = [
+					'student_id' 	=> $student->id,
+					'class_id' 		=> $student->class_id,
+					'title' 		=> $value['D'] ?? null,
+					'description' 	=> $value['E'] ?? null,
+					'status_exam' 	=> $value['F'] ?? null,
+					'type' 			=> 1,
+					'created_at' 	=> date('Y-m-d H:i:s'),
+					'created_by' 	=> $session->id,
+				];
+			}
+
+			// input data ke database tb student
+			$this->m_crud->add_batch('announcement', $data);
+
+			$out['status'] = 'berhasil';
+		} else {
+			$out['status'] = 'gagal';
+		}
+
+		echo json_encode($out);
+	}
 }
