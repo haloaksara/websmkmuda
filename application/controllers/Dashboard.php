@@ -39,19 +39,18 @@ class Dashboard extends CI_Controller {
 		$param				= ['get_by_id' => $user_id];
 		$data['user']		= $this->m_crud->getData('users', $param)->row();
 		$data['student'] 	= $this->m_crud->getData('student', ['user_id' => $user_id])->row();
-		$student_id 		= $data['student']->id;
 
 		// cek apakah siswa
 		if ($role_id == 3) {
 			// ambil data pengumuman yang private berdasarkan siswa yang login
-			$this->db->where('student_id', $student_id);
+			$this->db->where('student_id', $data['student']->id);
 			$this->db->where('class_id', $data['student']->class_id);
 			$data['announcement'] = $this->db->get('announcement')->result();
 
 			$this->db->select('student_file.*, file_type.name');
 			$this->db->from('student_file');
 			$this->db->join('file_type', 'file_type.id = student_file.file_type_id', 'left');
-			$this->db->where('student_file.student_id', $student_id);
+			$this->db->where('student_file.student_id', $data['student']->id);
 			$data['student_file'] = $this->db->get()->result();
 		}
 		

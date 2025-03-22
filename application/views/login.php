@@ -6,6 +6,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Login | SMK Muda</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
@@ -94,6 +97,11 @@
 
 <body>
     <div class="login-container">
+        <?php if ($this->session->flashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?= $this->session->flashdata('error'); ?>
+            </div>
+        <?php endif; ?>
         <h2>Login Form</h2>
         <form action="<?php echo base_url('auth/action_login'); ?>" method="post">
             <!-- Email input -->

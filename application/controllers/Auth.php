@@ -28,6 +28,9 @@ class Auth extends CI_Controller {
 
 	public function action_login() 
 	{
+		// Hapus pesan error dari session sebelum login diproses
+		$this->session->unset_userdata('error'); 
+
 		$username = trim($this->input->post('username'));
 		$password = trim($this->input->post('password'));	
 
@@ -39,7 +42,7 @@ class Auth extends CI_Controller {
 
 		$cek = $this->m_auth->cek_login("users",$where)->row_array();
 
-		if(count($cek) > 0){
+		if($cek){
 			$param			= [
 				'custom_param' => 'user_id',
 				'get_by_custom' => $cek['id']
@@ -60,7 +63,8 @@ class Auth extends CI_Controller {
 			redirect(base_url("dashboard"));
  
 		}else{
-			echo "Username dan password salah !";
+			$this->session->set_flashdata('error', 'Username atau password salah!');
+			redirect('login');
 		}
 	}
 
