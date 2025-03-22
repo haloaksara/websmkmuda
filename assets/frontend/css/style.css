@@ -76,7 +76,7 @@
   height: 13px;
   width: 13px;
   opacity: 0.5;
-  background: #5372f0;
+  background: #fff;
 }
 
 .card-wrapper .swiper-pagination-bullet-active{
@@ -84,7 +84,7 @@
 }
 
 .card-wrapper .swiper-slide-button{
-  color: #5372f0;
+  color: #fff;
   margin-top: -35px;
 } 
 

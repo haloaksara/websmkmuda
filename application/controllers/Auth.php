@@ -47,6 +47,7 @@ class Auth extends CI_Controller {
 			$user_has_role = $this->m_crud->getData('user_has_role', $param)->row_array();
 
 			$data_session = array(
+				'id' => $cek['id'],
 				'username' => $cek['username'],
 				'name' => $cek['name'],
 				'phone' => $cek['phone'],

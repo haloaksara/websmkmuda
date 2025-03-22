@@ -47,11 +47,13 @@ $user_role = $this->db->query($sql)->result_array();
 
 				<!-- menu Master -->
 				<li class="nav-item <?= $segment2 == 'master' ? 'active' : '' ?>">
+					<?php if ($role_id == 1 || $role_id == 2) { ?>
 					<a data-bs-toggle="collapse" href="#master">
 					<i class="	fas fa-bars"></i>
 						<p>Master</p>
 						<span class="caret"></span>
 					</a>
+					<?php } ?>
 					<div class="collapse" id="master">
 						<ul class="nav nav-collapse">
 							<?php if (in_array('users', array_column($user_role, 'name'))) : ?>

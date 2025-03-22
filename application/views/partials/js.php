@@ -1,5 +1,5 @@
 <!-- Vendor JS Files -->
-<script src="<?= base_url('assets/frontend/') ?><?= base_url('assets/frontend/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url('assets/frontend/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url('assets/frontend/') ?>vendor/php-email-form/validate.js"></script>
 <script src="<?= base_url('assets/frontend/') ?>vendor/aos/aos.js"></script>
 <script src="<?= base_url('assets/frontend/') ?>vendor/glightbox/js/glightbox.min.js"></script>

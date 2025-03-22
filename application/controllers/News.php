@@ -43,9 +43,9 @@ class News extends CI_Controller {
 			$row = array();
 			$row[] = $no;
 
-			$row[] = $dt->title;
-			$row[] = substr($dt->content, 0, 100) . '...';
-			$row[] = $dt->post_date;
+			$row[] = $dt->title ?? '-';
+			$row[] = substr($dt->content ?? '-', 0, 100) . '...' ?? '-';
+			$row[] = $dt->post_date ?? '-';
 
 			if ($dt->status == '0') {
 				$status = '<span class="badge rounded-pill bg-warning">Draft</span>';
@@ -55,7 +55,7 @@ class News extends CI_Controller {
 				$status = '-';
 			}
 
-			$row[] = $status;
+			$row[] = $status ?? '-';
 
 			$row[] = '<a href="../upload/news/'.$dt->file.'" class="btn btn-xs btn-primary">Download File</a>';
 			$row[] = '<img src="../upload/news/'.$dt->image.'" style="width: auto; height: 100px;" alt="No Image">';
@@ -110,7 +110,7 @@ class News extends CI_Controller {
 			'created_by' => $created_by
 		);
 
-		if ($_FILES['image']['name'] != '' || $_FILES['image']['name'] != null || isset($_FILES['image']['name'])) {
+		if ($_FILES['image']['name'] != 4) {
 			$image_name 	= 'imgnews_' . date('ymd') . '-' . substr(md5(rand()), 0, 10);	
 
 			$config['upload_path'] = './upload/news/';
@@ -128,7 +128,7 @@ class News extends CI_Controller {
 			}
 		}
 
-		if ($_FILES['file']['name'] != '' || $_FILES['file']['name'] != null || isset($_FILES['file']['name'])) {
+		if ($_FILES['file']['error'] != 4) {
 			$file_name 	= 'filenews_' . date('ymd') . '-' . substr(md5(rand()), 0, 10);	
 			
 			$config['upload_path'] = './upload/news/';
