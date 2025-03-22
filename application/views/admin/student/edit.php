@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="class_id">Kelas</label>
-                                        <select name="class_id" id="" class="form-select">
+                                        <select name="class_id" id="" class="form-select" required>
                                             <?php foreach ($class as $cl) : ?>
                                             <option value="<?= $cl->id ?>" <?= $student->class_id == $cl->id ? 'selected' : '' ?>>
                                                 <?= $cl->name ?>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="major_id">Jurusan</label>
-                                        <select name="major_id" id="" class="form-select">
+                                        <select name="major_id" id="" class="form-select" required>
                                             <?php foreach ($major as $mj) : ?>
                                             <option value="<?= $mj->id ?>" <?= $student->major_id == $mj->id ? 'selected' : '' ?>>
                                                 <?= $mj->name ?>

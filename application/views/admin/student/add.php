@@ -54,16 +54,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="class_id">Kelas</label>
-                                        <select name="class_id" id="" class="form-select">
+                                        <label for="class_id">Kelas*</label>
+                                        <select name="class_id" id="" class="form-select" required>
                                             <?php foreach ($class as $cl) : ?>
                                                 <option value="<?= $cl->id ?>"><?= $cl->name ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="major_id">Jurusan</label>
-                                        <select name="major_id" id="" class="form-select">
+                                        <label for="major_id">Jurusan*</label>
+                                        <select name="major_id" id="" class="form-select" required>
                                             <?php foreach ($major as $mj) : ?>
                                                 <option value="<?= $mj->id ?>"><?= $mj->name ?></option>
                                             <?php endforeach; ?>

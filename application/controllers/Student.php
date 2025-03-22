@@ -153,7 +153,7 @@ class Student extends CI_Controller {
 		// insert user_has_role
 		$data_user_role = array(
 			'user_id' => $user_id,
-			'role_id' => 3
+			'role_id' => 3 //siswa
 		);
 		$this->m_crud->input($data_user_role, 'user_has_role');
 
@@ -292,9 +292,28 @@ class Student extends CI_Controller {
 			$spreadsheet = $reader->load($path);
 			$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true, true);
 
+			$this->db->trans_start(); // Mulai transaksi
+
 			$data = [];
 			foreach ($sheetData as $key => $value) {
 				if ($key == 1) continue; // Skip header row
+
+				// Jika NIS (kolom A) kosong, batalkan transaksi
+				if (empty($value['A'])) {
+					$this->db->trans_rollback(); // Batalkan transaksi
+					$out['status'] = 'gagal_import';
+					echo json_encode($out); // Ganti dengan URL tujuan
+					return;
+				}
+
+				// Jika Nama (kolom C) kosong, batalkan transaksi
+				if (empty($value['C'])) {
+					$this->db->trans_rollback();
+					$out['status'] = 'gagal_import';
+					echo json_encode($out);
+					return;
+				}
+
 				$data_user = [
 					'name' => $value['C'] ?? null,
 					'username' => $value['A'] ?? null,
@@ -335,8 +354,13 @@ class Student extends CI_Controller {
 
 			// input data ke database tb student
 			$this->m_student->add_batch('student', $data);
+			$this->db->trans_complete(); // Selesaikan transaksi
 
-			$out['status'] = 'berhasil';
+			if ($this->db->trans_status() === FALSE) {
+				$out['status'] = 'gagal_import';
+			} else {
+				$out['status'] = 'berhasil';
+			}
 		} else {
 			$out['status'] = 'gagal';
 		}

@@ -70,16 +70,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="class_id">Kelas</label>
-                        <select name="class_id" id="class_id" class="form-select">
+                        <label for="class_id">Kelas*</label>
+                        <select name="class_id" id="class_id" class="form-select" required>
                             <?php foreach ($class as $row) : ?>
                                 <option value="<?= $row->id ?>"><?= $row->name ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="major_id">Kelas</label>
-                        <select name="major_id" id="major_id" class="form-select">
+                        <label for="major_id">Jurusan*</label>
+                        <select name="major_id" id="major_id" class="form-select" required>
                             <?php foreach ($major as $row) : ?>
                                 <option value="<?= $row->id ?>"><?= $row->name ?></option>
                             <?php endforeach; ?>
@@ -267,14 +267,24 @@
             processData: false,
             dataType: 'json',  // Tambahkan ini
             success: (data) => {
+                console.log(data);
+                
                 this.reset();
 
                 $('#modal-import').modal('hide');
                 if (data.status == 'berhasil') {
                     import_berhasil();
+                } else if (data.status == 'gagal_import') {
+                    Swal.fire("Oops...", "Gagal import, silahkan cek file excel dan pastikan semua kolom terisi", "error");
                 } else {
                     Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
                 }
+
+                // if (data.status == 'berhasil') {
+                //     import_berhasil();
+                // } else {
+                //     Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
+                // }
             },
             error: function(data) {
                 Swal.fire("Oops...", "Ada Sesuatu yang Salah :(", "error");
