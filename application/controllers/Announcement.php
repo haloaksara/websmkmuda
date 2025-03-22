@@ -59,7 +59,7 @@ class Announcement extends CI_Controller {
 
 			if ($type == 'private') {
 				$row[] = $dt->title;
-				$row[] = substr($dt->description, 0, 100) . '...' ?? '-';
+				$row[] = isset($dt->description) ? substr($dt->description, 0, 100).'...' : '-' ;
 				if ($dt->status_exam == 0) {
 					$row[] = 'Tidak Lulus';
 				}elseif($dt->status_exam == 1){
@@ -70,7 +70,7 @@ class Announcement extends CI_Controller {
 				
 			}else{
 				$row[] = $dt->title;
-				$row[] = substr($dt->description, 0, 100) . '...';
+				$row[] = isset($dt->description) ? substr($dt->description, 0, 100).'...' : '-' ;
 
 				if ($dt->status == 0) {
 					$row[] = 'Draft';
@@ -297,9 +297,28 @@ class Announcement extends CI_Controller {
 			$spreadsheet = $reader->load($path);
 			$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true, true);
 
+			$this->db->trans_start(); // Mulai transaksi
+
 			$data = [];
 			foreach ($sheetData as $key => $value) {
 				if ($key == 1) continue; // Skip header row
+
+				// Jika NIS (kolom A) kosong, batalkan transaksi
+				if (empty($value['A'])) {
+					$this->db->trans_rollback(); // Batalkan transaksi
+					$out['status'] = 'gagal_import';
+					echo json_encode($out); // Ganti dengan URL tujuan
+					return;
+				}
+
+				// Jika Status ujian (kolom F) kosong, batalkan transaksi
+				if (empty($value['F'])) {
+					$this->db->trans_rollback(); // Batalkan transaksi
+					$out['status'] = 'gagal_import';
+					echo json_encode($out); // Ganti dengan URL tujuan
+					return;
+				}
+
 				$param = [
 					'get_by_custom' => $value['A'], 
 					'custom_param' => 'nis'
@@ -320,8 +339,13 @@ class Announcement extends CI_Controller {
 
 			// input data ke database tb student
 			$this->m_crud->add_batch('announcement', $data);
+			$this->db->trans_complete(); // Selesaikan transaksi
 
-			$out['status'] = 'berhasil';
+			if ($this->db->trans_status() === FALSE) {
+				$out['status'] = 'gagal_import';
+			} else {
+				$out['status'] = 'berhasil';
+			}
 		} else {
 			$out['status'] = 'gagal';
 		}

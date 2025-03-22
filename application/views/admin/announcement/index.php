@@ -32,8 +32,10 @@
                                 <i class="fa fa-plus"></i>
                                 Tambah Data
                             </a>
+                            <?php if ($type == 'private') { ?>
                             <a class="btn btn-success btn-round" href="#" data-bs-toggle="modal" data-bs-target="#modal-import"><i class="fas fa-upload"></i> Impor
                                 Data</a>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="card-body">
@@ -241,6 +243,8 @@
                 $('#modal-import').modal('hide');
                 if (data.status == 'berhasil') {
                     import_berhasil();
+                } else if (data.status == 'gagal_import') {
+                    Swal.fire("Oops...", "Gagal import, silahkan cek file excel dan pastikan semua kolom terisi", "error");
                 } else {
                     Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
                 }

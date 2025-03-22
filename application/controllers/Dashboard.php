@@ -38,7 +38,12 @@ class Dashboard extends CI_Controller {
 		$user_id 			= $this->session->userdata('id');
 		$param				= ['get_by_id' => $user_id];
 		$data['user']		= $this->m_crud->getData('users', $param)->row();
-		$data['student'] 	= $this->m_crud->getData('student', ['user_id' => $user_id])->row();
+
+		$param 				= [
+			'get_by_custom'	=> $user_id,
+			'custom_param'	=> 'user_id'
+		];
+		$data['student'] 	= $this->m_crud->getData('student', $param)->row();
 
 		// cek apakah siswa
 		if ($role_id == 3) {
