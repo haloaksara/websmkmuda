@@ -40,7 +40,7 @@
                                     <tr>
                                         <th width="5%">No</th>
                                         <th width="75%">Nama</th>
-                                        <th width="20%">Action</th>
+                                        <!-- <th width="20%">Action</th> -->
                                     </tr>
                                 </thead>
                             </table>

@@ -46,9 +46,9 @@ class Permission extends CI_Controller {
 
 			$row[] = $dt->name;
 			
-			$row[] =  anchor('admin/permissions/edit/' . $dt->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
+			// $row[] =  anchor('admin/permissions/edit/' . $dt->id, ' Edit ', ' class="btn btn-warning btn-sm" ') .
 			
-			'  <button class="btn btn-danger btn-sm delete" data-id=' . "'" . $dt->id . "'" . '>Hapus</button>';
+			// '  <button class="btn btn-danger btn-sm delete" data-id=' . "'" . $dt->id . "'" . '>Hapus</button>';
 			
 			$data[] = $row;
 		}
