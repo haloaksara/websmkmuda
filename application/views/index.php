@@ -601,24 +601,14 @@
                     <h2>Galeri Kegiatan</h2>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 gallery-grid">
-                    <div class="col">
-                        <a class="gallery-item" href="https://picsum.photos/id/251/1200/800.webp">
-                            <img src="https://picsum.photos/id/251/480/320.webp" class="img-fluid"
-                                alt="Lorem ipsum dolor sit amet">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a class="gallery-item" href="https://picsum.photos/id/678/1200/800.webp">
-                            <img src="https://picsum.photos/id/678/480/320.webp" class="img-fluid"
-                                alt="Ipsum lorem dolor sit amet">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a class="gallery-item" href="https://picsum.photos/id/74/1200/800.webp">
-                            <img src="https://picsum.photos/id/74/480/320.webp" class="img-fluid"
-                                alt="Dolor lorem ipsum sit amet">
-                        </a>
-                    </div>
+                    <?php foreach ($gallery as $item_gallery): ?>
+                        <div class="col">
+                            <a class="gallery-item" href="<?= base_url('upload/gallery/'.$item_gallery->attachment) ?>">
+                                <img src="<?= base_url('upload/gallery/'.$item_gallery->attachment) ?>" class="img-fluid"
+                                    alt="Lorem ipsum dolor sit amet">
+                            </a>
+                        </div>
+                    <?php endforeach ?>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                     <a href="#" class="btn btn-primary">Tampilkan Lebih Banyak</a>

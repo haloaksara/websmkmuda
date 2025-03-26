@@ -1,6 +1,11 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
+            <?php if ($this->session->flashdata('error')): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $this->session->flashdata('error') ?>
+                </div>
+            <?php endif; ?>
             <!-- <h3 class="fw-bold mb-3"><?= $title ?></h3> -->
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">

@@ -14,7 +14,8 @@ class Home extends CI_Controller {
 			'custom_param' => 'status'
 		];
 		$data['news'] = $this->m_crud->getData('news', $param)->result();
-		// var_dump($data); die;
+		$data['gallery'] = $this->m_crud->getData('gallery')->result();
+		// var_dump($data['gallery']); die;
 
 		$this->load->view('index', $data);
 	}

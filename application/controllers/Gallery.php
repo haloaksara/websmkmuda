@@ -79,11 +79,11 @@ class Gallery extends CI_Controller {
 			'description' => $description
 		);
 
-		if ($_FILES['image']['name'] != '' || $_FILES['image']['name'] != null || isset($_FILES['image']['name'])) {
+		if ($_FILES['image']['name'] != 4) {
 			$image_name 	= 'imggallery_' . date('ymd') . '-' . substr(md5(rand()), 0, 10);	
 
 			$config['upload_path'] = './upload/gallery/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg|webp';
 			$config['max_size'] = '2048'; //maksimum besar file 2M
 			$config['file_name'] = $image_name;
 			$this->load->library('upload', $config);
@@ -93,6 +93,7 @@ class Gallery extends CI_Controller {
 				$gbr = $this->upload->data();
 				$data['attachment'] = $gbr['file_name'];
 			} else {
+				$this->session->set_flashdata('error', $this->upload->display_errors());
 				redirect('admin/gallery/add');
 			}
 		}
