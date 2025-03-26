@@ -92,6 +92,8 @@ $route['admin/news'] =   'News';
 $route['admin/news/list'] =   'News/list';
 $route['admin/news/add'] =   'News/add';
 $route['admin/news/edit/(:any)'] = 'News/edit/$1';
+$route['news/detail/(:any)'] = 'News/show/$1';
+$route['news/list'] = 'News/show_list';
 
 // route galeri
 $route['admin/gallery'] =   'Gallery';

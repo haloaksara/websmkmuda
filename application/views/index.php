@@ -312,7 +312,7 @@
                                     <h2 class="card-title"><?= $item->title; ?></h2>
                                     <p class="card-text"><?= substr($item->content, 0, 100); ?>...</p>
                                     <!-- batasi content hanya 100 karakter -->
-                                    <button class="btn btn-primary">Baca Selengkapnya</button>
+                                    <a href="<?= site_url('news/detail/'.$item->id) ?>" class="btn btn-primary">Baca Selengkapnya</a>
                                 </a>
                             </li>
                             <?php endforeach; ?>
@@ -323,7 +323,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                    <a href="#" class="btn btn-light">Tampilkan Lebih Banyak</a>
+                    <a href="<?= site_url('news/list/') ?>" class="btn btn-light">Tampilkan Lebih Banyak</a>
                 </div>
                 <!-- jika data < dari 3 maka buat card biasa yang tidak bisa di slider -->
                 <?php else: ?>
@@ -338,7 +338,7 @@
                                     <h5 class="card-title"><?= $item->title; ?></h5>
                                     <p class="card-text"><?= substr($item->content, 0, 100); ?>...</p>
                                     <!-- batasi content hanya 100 karakter -->
-                                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                                    <a href="<?= site_url('news/detail/'.$item->id) ?>" class="btn btn-primary">Baca Selengkapnya</a>
                                 </div>
                             </div>
                         </div>
@@ -394,10 +394,8 @@
         <!-- End News -->
 
         <!-- Clients Section -->
-        <section id="clients" class="clients section">
-
+        <!-- <section id="clients" class="clients section">
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="swiper init-swiper">
                     <script type="application/json" class="swiper-config">
                         {
@@ -452,19 +450,15 @@
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
-
             </div>
-
-        </section><!-- /Clients Section -->
+        </section> -->
+        <!-- /Clients Section -->
 
         <!-- Profil Alumni Section -->
-        <section id="testimonials" class="testimonials section light-background">
-
-            <!-- Section Title -->
+        <!-- <section id="testimonials" class="testimonials section light-background">
             <div class="container section-title" data-aos="fade-up">
                 <h2>Profil Alumni</h2>
-            </div><!-- End Section Title -->
-
+            </div>
             <div class="container">
 
                 <div class="row g-5">
@@ -482,7 +476,7 @@
                                 <i class="bi bi-quote quote-icon-right"></i>
                             </p>
                         </div>
-                    </div><!-- End testimonial item -->
+                    </div>
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="testimonial-item">
@@ -497,7 +491,7 @@
                                 <i class="bi bi-quote quote-icon-right"></i>
                             </p>
                         </div>
-                    </div><!-- End testimonial item -->
+                    </div>
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="testimonial-item">
@@ -512,7 +506,7 @@
                                 <i class="bi bi-quote quote-icon-right"></i>
                             </p>
                         </div>
-                    </div><!-- End testimonial item -->
+                    </div>
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="testimonial-item">
@@ -527,12 +521,12 @@
                                 <i class="bi bi-quote quote-icon-right"></i>
                             </p>
                         </div>
-                    </div><!-- End testimonial item -->
+                    </div>
 
                 </div>
 
             </div>
-        </section>
+        </section> -->
         <!-- /Profil Alumni Section -->
 
         <!-- Call To Action Section -->

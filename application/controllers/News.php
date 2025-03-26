@@ -261,4 +261,28 @@ class News extends CI_Controller {
 
 		return $file_name;
 	}
+
+	public function show($id) 
+	{
+		$data['title'] = 'Berita';
+		$data['breadcrumb1'] = 'Berita';
+		$data['breadcrumb2'] = 'Detail';
+
+		$param = ['get_by_id' => $id];
+		$data['news'] = $this->m_crud->getData('news', $param)->row();
+
+		$this->load->view('detail_news', $data);
+	}
+
+	public function show_list() 
+	{
+		$list = $this->m_crud->getData('news')->result();
+
+		$data['title'] = 'Daftar Berita';
+		$data['breadcrumb1'] = 'Berita';
+		// $data['breadcrumb2'] = 'Detail';
+		$data['list'] = $list;
+
+		$this->load->view('list_news', $data);
+	}
 }
