@@ -93,7 +93,7 @@
             processing: true,
             order: [],
             oLanguage: {
-                sProcessing: "<img src='<?php base_url(); ?>assets/tambahan/gambar/loading.gif' width='30px'>",
+                sProcessing: "<img src='<?php base_url(); ?>../assets/tambahan/gambar/loading.gif' width='30px'>",
                 "oPaginate": {
                     "sPrevious": "Prev"
                 },
@@ -140,7 +140,8 @@ $(document).ready(function() {
     $('#dataTable').on('click', '.upload-btn', function() {
         var file_type_id = $(this).data('file-type-id');
         var studentId = $(this).data('id');
-        var fileInput = $('<input type="file" accept=".jpg,.jpeg,.png,.pdf,.docx,.xlsx" style="display:none;">');
+        var fileInput = $('<input type="file" name="file" accept=".jpg,.jpeg,.png,.pdf,.docx,.xlsx" style="display:none;" />');
+        $('body').append(fileInput);
 
         fileInput.click();
 

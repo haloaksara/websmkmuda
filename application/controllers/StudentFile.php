@@ -97,10 +97,11 @@ class StudentFile extends CI_Controller {
 		$type = $this->m_crud->getData('file_type', ['get_by_id' => $file_type_id])->row();
 		$student = $this->m_crud->getData('student', ['get_by_id' => $student_id])->row();
 
-		$file_name 	= $type->name . '_' . $student->nis . '_' .  str_replace(" ", "_", $student->full_name);
+		$file_extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+		$file_name 	= $type->name . '_' .  str_replace(" ", "_", $student->full_name) . '.' . $file_extension;
 
 		$config['upload_path'] = './upload/student_file/';
-		$config['allowed_types'] = 'jpg|jpeg|png|pdf|docx|xlsx';
+		$config['allowed_types'] = '*';
 		$config['max_size'] = '3000'; //maksimum besar file 2M
 		$config['file_name'] = $file_name;
 		$this->load->library('upload', $config);
@@ -111,7 +112,7 @@ class StudentFile extends CI_Controller {
 			$data = [
 				'student_id' => $student_id,
 				'file_type_id' => $file_type_id,
-				'file' => $file_name.$gbr['file_ext'],
+				'file' => $file_name,
 			];
 			$this->db->insert('student_file', $data);
 
