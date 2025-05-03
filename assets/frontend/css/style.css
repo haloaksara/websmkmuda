@@ -97,3 +97,17 @@
       display: none;
   }
 }
+
+.countdown-box {
+  width: 70px;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+}
+.countdown-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.countdown-label {
+  font-size: 0.9rem;
+}

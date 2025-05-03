@@ -188,6 +188,14 @@ $user_role = $this->db->query($sql)->result_array();
 				<?php endif; ?>
 
 				<!-- menu settings -->
+				<?php if (in_array('setting', array_column($user_role, 'name'))) : ?>
+				<li class="nav-item <?= $segment2 == 'setting' ? 'active' : '' ?>">
+					<a href="<?= site_url('admin/setting') ?>" class="nav-item">
+						<i class="fas fa-book"></i>
+						<p>Setting</p>
+					</a>
+				</li>
+				<?php endif; ?>
 				<!-- <li class="nav-item">
 					<a data-bs-toggle="collapse" href="#submenu">
 						<i class="fas fa-bars"></i>

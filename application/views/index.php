@@ -306,14 +306,18 @@
                         <ul class="card-list swiper-wrapper">
                             <?php foreach ($news as $item): ?>
                             <li class="card-item swiper-slide">
-                                <a href="#" class="card-link">
-                                    <img src="upload/news/<?= $item->image; ?>" class="card-image"
-                                        style="height: 200px; object-fit: cover;">
-                                    <h2 class="card-title"><?= $item->title; ?></h2>
-                                    <p class="card-text"><?= substr($item->content, 0, 100); ?>...</p>
-                                    <!-- batasi content hanya 100 karakter -->
-                                    <a href="<?= site_url('news/detail/'.$item->id) ?>" class="btn btn-primary">Baca Selengkapnya</a>
-                                </a>
+                                <div class="card">
+                                    <a href="#" class="card-link">
+                                        <img src="upload/news/<?= $item->image; ?>" class="card-image"
+                                            style="height: 200px; object-fit: cover;">
+                                    </a>
+                                    <div class="card-body">
+                                        <h2 class="card-title"><?= $item->title; ?></h2>
+                                        <p class="card-text"><?= substr($item->content, 0, 100); ?>...</p>
+                                        <!-- batasi content hanya 100 karakter -->
+                                        <a href="<?= site_url('news/detail/'.$item->id) ?>" class="btn btn-primary">Baca Selengkapnya</a>
+                                    </div>
+                                </div>
                             </li>
                             <?php endforeach; ?>
                         </ul>
@@ -537,8 +541,75 @@
                 <div class="row content justify-content-center align-items-center position-relative">
                     <div class="col-lg-8 mx-auto text-center">
                         <h2 class="display-4 mb-4">Pengumuman Kelulusan</h2>
+                        <?php
+                            $targetDate = new DateTime($countdown->value); // Assuming $countdown->value contains the date string
+                            $targetTimestamp = $targetDate->getTimestamp();
+                        ?>
+                        <div id="countdown" class="mb-4 d-flex justify-content-center gap-2" style="font-size: 1.5rem; font-weight: bold;">
+                            <div class="countdown-box text-center">
+                                <div id="days" class="countdown-value">0</div>
+                                <div class="countdown-label">Hari</div>
+                            </div>
+                            <div class="countdown-box text-center">
+                                <div id="hours" class="countdown-value">0</div>
+                                <div class="countdown-label">Jam</div>
+                            </div>
+                            <div class="countdown-box text-center">
+                                <div id="minutes" class="countdown-value">0</div>
+                                <div class="countdown-label">Menit</div>
+                            </div>
+                            <div class="countdown-box text-center">
+                                <div id="seconds" class="countdown-value">0</div>
+                                <div class="countdown-label">Detik</div>
+                            </div>
+                        </div>
+                        <script>
+                            const targetTimestamp = <?= $targetTimestamp ?> * 1000;
+
+                            function updateCountdown() {
+                                const now = new Date().getTime();
+                                const distance = targetTimestamp - now;
+
+                                if (distance < 0) {
+                                    document.getElementById('countdown').innerHTML = "Waktu telah habis.";
+                                    clearInterval(countdownInterval);
+                                    return;
+                                }
+
+                                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                document.getElementById('days').innerHTML = days;
+                                document.getElementById('hours').innerHTML = hours;
+                                document.getElementById('minutes').innerHTML = minutes;
+                                document.getElementById('seconds').innerHTML = seconds;
+                            }
+
+                            const countdownInterval = setInterval(updateCountdown, 1000);
+                            updateCountdown();
+                        </script>
                         <p class="mb-4">Klik tombol dibawah ini untuk melihat pengumuman kelulusan</p>
-                        <a href="<?= site_url('login') ?>" class="btn btn-cta">Cek Kelulusan</a>
+                        <a href="<?= site_url('login') ?>" id="cekKelulusanBtn" class="btn btn-cta disabled" aria-disabled="true">Cek Kelulusan</a>
+                        <script>
+                            function updateButtonState() {
+                                const now = new Date().getTime();
+                                const distance = targetTimestamp - now;
+
+                                const cekKelulusanBtn = document.getElementById('cekKelulusanBtn');
+                                if (distance <= 0) {
+                                    cekKelulusanBtn.classList.remove('disabled');
+                                    cekKelulusanBtn.removeAttribute('aria-disabled');
+                                } else {
+                                    cekKelulusanBtn.classList.add('disabled');
+                                    cekKelulusanBtn.setAttribute('aria-disabled', 'true');
+                                }
+                            }
+
+                            setInterval(updateButtonState, 1000);
+                            updateButtonState();
+                        </script>
                     </div>
 
                     <!-- Abstract Background Elements -->

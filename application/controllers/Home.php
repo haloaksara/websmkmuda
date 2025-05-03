@@ -13,9 +13,15 @@ class Home extends CI_Controller {
 			'get_by_custom' => 1,
 			'custom_param' => 'status'
 		];
+
+		$param_count = [
+			'get_by_custom' => 'countdown',
+			'custom_param' => 'key'
+		];
 		$data['news'] = $this->m_crud->getData('news', $param)->result();
 		$data['gallery'] = $this->m_crud->getData('gallery')->result();
-		// var_dump($data['gallery']); die;
+		$data['countdown'] = $this->m_crud->getData('settings', $param_count)->row();
+		// var_dump($data['countdown']->value); die;
 
 		$this->load->view('index', $data);
 	}

@@ -92,8 +92,8 @@ $route['admin/news'] =   'News';
 $route['admin/news/list'] =   'News/list';
 $route['admin/news/add'] =   'News/add';
 $route['admin/news/edit/(:any)'] = 'News/edit/$1';
-$route['news/detail/(:any)'] = 'News/show/$1';
-$route['news/list'] = 'News/show_list';
+$route['news/detail/(:any)'] = 'User_news/show/$1';
+$route['news/list'] = 'User_news/show_list';
 
 // route galeri
 $route['admin/gallery'] =   'Gallery';
@@ -135,3 +135,8 @@ $route['admin/permissions'] =   'Permission';
 $route['admin/permissions/list'] =   'Permission/list';
 $route['admin/permissions/add'] =   'Permission/add';
 $route['admin/permissions/edit/(:any)'] = 'Permission/edit/$1';
+
+$route['admin/setting'] =   'Setting';
+$route['admin/setting/list'] =   'Setting/list';
+$route['admin/setting/add'] =   'Setting/add';
+$route['admin/setting/edit/(:any)'] = 'Setting/edit/$1';
