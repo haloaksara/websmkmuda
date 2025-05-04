@@ -32,6 +32,68 @@
                                 <i class="fa fa-plus"></i>
                                 Tambah Data
                             </a>
+                            <button class="btn btn-warning btn-round ms-2" id="resetPasswordBtn">
+                                <i class="fa fa-key"></i>
+                                Reset Password
+                            </button>
+
+                            <script type="text/javascript">
+                                $(document).on("click", "#resetPasswordBtn", function() {
+                                    const checkedBoxes = document.querySelectorAll('#userDataTable tbody input[type="checkbox"]:checked');
+                                    const selectedIds = Array.from(checkedBoxes).map(checkbox => checkbox.value);
+
+                                    if (selectedIds.length === 0) {
+                                        Swal.fire({
+                                            title: "Tidak ada data terpilih!",
+                                            text: "Silakan pilih data terlebih dahulu.",
+                                            icon: "warning",
+                                            button: "Ok",
+                                        });
+                                        return;
+                                    }
+
+                                    Swal.fire({
+                                        title: 'Reset password?',
+                                        text: "Yakin ingin mereset password untuk data yang dipilih?",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Reset'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            $.ajax({
+                                                method: "POST",
+                                                url: "<?php echo base_url('User/reset_password'); ?>",
+                                                data: { ids: selectedIds },
+                                                success: (data) => {
+                                                    console.log(data);
+                                                    if (data.status == 'berhasil') {
+                                                        Swal.fire({
+                                                            title: "Berhasil!",
+                                                            text: data.message,
+                                                            icon: "success",
+                                                            button: "Ok",
+                                                        }).then(() => {
+                                                            reload_table();
+                                                        });
+                                                    } else {
+                                                        Swal.fire("Oops...", "Tidak ada data untuk diimpor", "error");
+                                                    }
+                                                },
+                                                error: function() {
+                                                    Swal.fire({
+                                                        title: "Terjadi kesalahan!",
+                                                        text: "Gagal mereset password.",
+                                                        icon: "error",
+                                                        button: "Ok",
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                     <div class="card-body">
@@ -39,6 +101,7 @@
                             <table id="userDataTable" class="display table table-striped table-hover" width="100%">
                                 <thead>
                                     <tr>
+                                        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Email</th>
@@ -99,10 +162,12 @@
 
 
 <script type="text/javascript">
-    
-    // $(document).ready(function () {
-    //     $("#userDataTable").DataTable({});
-    // });
+    function toggleSelectAll(source) {
+        const checkboxes = document.querySelectorAll('#userDataTable tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => { 
+            checkbox.checked = source.checked;
+        });
+    }
 
     var save_method; //for save method string
     var table;

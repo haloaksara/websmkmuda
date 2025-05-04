@@ -43,6 +43,7 @@ class User extends CI_Controller {
 		foreach ($list as $user) {
 			$no++;
 			$row = array();
+			$row[] = '<input type="checkbox" class="user-checkbox" value="' . $user->id . '" ids="' . $user->id . '">';
 			$row[] = $no;
 
 			$row[] = $user->name;
@@ -219,4 +220,42 @@ class User extends CI_Controller {
 			$out['status'] = 'gagal';
 		}
     }
+
+	public function reset_password()
+	{
+		$selected_ids = $this->input->post('ids'); // Array of selected user IDs
+
+		if (!empty($selected_ids)) {
+			foreach ($selected_ids as $id) {
+				$param = [
+					'get_by_id' => $id
+				];
+				$user = $this->m_crud->getDataUser('users', $param)->row();
+
+				$full_name = $user->name;
+				$nick_name = strtolower(explode(' ', trim($full_name ))[0]);
+				$date_of_birth = str_replace('-', '', $user->date_of_birth);
+				$new_account = $nick_name . '_' . $date_of_birth;
+
+				$data = array(
+					'username' => $new_account,
+					'password' => sha1($new_account),
+					'updated_at' => date('Y-m-d H:i:s')
+				);
+
+				$where = ['id' => $id];
+				$this->m_crud->update('users', $data, $where);
+			}
+
+			$out['status'] = 'berhasil';
+			$out['message'] = 'Password berhasil direset.';
+		} else {
+			$out['status'] = 'gagal';
+			$out['message'] = 'Tidak ada pengguna yang dipilih.';
+		}
+
+		$this->output
+         ->set_content_type('application/json')
+         ->set_output(json_encode($out));
+	}
 }

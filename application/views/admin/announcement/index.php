@@ -45,6 +45,7 @@
                                     <tr>
                                         <th width="5%">No</th>
                                         <?php if ($type == 'private') { ?>
+                                            <th width="20%">Nama</th>
                                             <th width="20%">Judul</th>
                                             <th width="40%">Deskripsi</th>
                                             <th width="15%">status</th>

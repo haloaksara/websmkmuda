@@ -76,4 +76,53 @@ class M_crud extends CI_Model{
     public function add_batch($table, $data) {
 		return $this->db->insert_batch($table, $data);
 	}
+
+    public function getDataUser($table, $param = []) 
+    {
+        $this->db->select('
+            users.*,
+            student.full_name,
+            student.date_of_birth');
+
+        $this->db->from('users');
+        $this->db->join('student', 'student.user_id=users.id');
+
+        // cek apakah terdapat parameter get_by_id
+        if (isset($param['get_by_id']) && !is_null($param['get_by_id'])) {
+            $this->db->where('users.id', $param['get_by_id']); //jika ya maka tambahkan klausa where berdasarkan id
+        }
+
+        // lakukan get data pada query dan masukkan dalam variable query
+        $query = $this->db->get(); 
+
+        // kembalikan hasil query yang ada pada variabel $query
+        return $query;    
+    }
+
+    public function getDataAnnouncement($table, $param = []) 
+    {
+        $this->db->select('
+            announcement.*,
+            student.full_name,
+            student.date_of_birth');
+
+        $this->db->from('announcement');
+        $this->db->join('student', 'announcement.student_id=student.id');
+
+        // cek apakah terdapat parameter get_by_id
+        if (isset($param['get_by_id']) && !is_null($param['get_by_id'])) {
+            $this->db->where('announcement.id', $param['get_by_id']); //jika ya maka tambahkan klausa where berdasarkan id
+        }
+
+        // cek apakah terdapat parameter get_by_custom
+        if (isset($param['get_by_custom']) && !is_null($param['get_by_custom'])) {
+            $this->db->where($param['custom_param'], $param['get_by_custom']); //jika ya maka tambahkan klausa where berdasarkan id
+        }
+
+        // lakukan get data pada query dan masukkan dalam variable query
+        $query = $this->db->get(); 
+
+        // kembalikan hasil query yang ada pada variabel $query
+        return $query;    
+    }
 }

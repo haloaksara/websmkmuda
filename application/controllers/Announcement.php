@@ -49,7 +49,7 @@ class Announcement extends CI_Controller {
 		}
 
 		$params = ['get_by_custom' => $get_by, 'custom_param' => 'type'];
-		$list = $this->m_crud->getData('announcement', $params)->result();
+		$list = $this->m_crud->getDataAnnouncement('announcement', $params)->result();
 		$data = array();
 		$no = @$_POST['start'];
 		foreach ($list as $dt) {
@@ -58,6 +58,7 @@ class Announcement extends CI_Controller {
 			$row[] = $no;
 
 			if ($type == 'private') {
+				$row[] = $dt->full_name;
 				$row[] = $dt->title;
 				$row[] = isset($dt->description) ? substr($dt->description, 0, 100).'...' : '-' ;
 				if ($dt->status_exam == 0) {
